@@ -18,6 +18,7 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.main`
+  -webkit-overflow-scrolling: touch;
   background-color: #fafafa;
   flex: 1;
   height: 100%;
@@ -43,6 +44,7 @@ const Filter = styled.div`
   bottom: 56px;
   height: 56px;
   position: fixed;
+  ${'' /* visibility: hidden; */}
   width: 100%;
   z-index: 4;
 
