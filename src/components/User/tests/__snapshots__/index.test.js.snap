@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User component renders correctly 1`] = `
+<div
+  className="c-user  foCcDl"
+>
+  <div
+    className="c-avatar  kGqdWm"
+  >
+    <img
+      className="c-image lazy-image gGwVwM"
+      data-src="image.jpg"
+      src="image.jpg"
+    />
+  </div>
+  <div
+    className="c-info eEhkFR"
+  >
+    <span
+      className="name"
+    >
+      Thandolwethu Mpofu
+    </span>
+    <span
+      className="username"
+    >
+      @elandamor
+    </span>
+  </div>
+</div>
+`;

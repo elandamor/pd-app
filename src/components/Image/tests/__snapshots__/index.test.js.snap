@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Image component renders correctly 1`] = `
+<img
+  className="c-image  gGwVwM"
+  data-src="image.png"
+  src="image.png"
+/>
+`;

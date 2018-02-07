@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Like component renders LIKED 1`] = `
+<button
+  aria-checked={true}
+  className="c-bttn__like is-liked hfCtrN"
+  data-count={1}
+  data-themed={false}
+>
+  <span>
+    1
+  </span>
+  <i
+    aria-hidden="true"
+    className="icon"
+    style={
+      Object {
+        "margin": "0 auto",
+        "position": "relative",
+      }
+    }
+  >
+    <svg
+      height="24"
+      style={undefined}
+      viewBox="0 0 20 18"
+      width="24"
+    >
+      <path
+        d="M14.398 0c-.916 0-1.99.45-3.22 1.346-.702.513-1.654.513-2.357 0C7.59.45 6.52 0 5.605 0 2.5 0 0 2.5 0 5.602c0 2.838 3.123 6.8 9.368 11.888.368.3.896.3 1.264 0C16.877 12.403 20 8.44 20 5.602 20 2.5 17.5 0 14.398 0z"
+        style={
+          Object {
+            "fill": "#C0392B",
+            "stroke": "none",
+            "strokeWidth": undefined,
+          }
+        }
+      />
+    </svg>
+  </i>
+</button>
+`;
+
+exports[`Like component renders UNLIKED 1`] = `
+<button
+  aria-checked={false}
+  className="c-bttn__like hfCtrN"
+  data-count={0}
+  data-themed={false}
+>
+  <i
+    aria-hidden="true"
+    className="icon"
+    style={
+      Object {
+        "margin": "0 auto",
+        "position": "relative",
+      }
+    }
+  >
+    <svg
+      height="24"
+      style={undefined}
+      viewBox="0 0 20 18"
+      width="24"
+    >
+      <path
+        d="M14.398.5c-.793 0-1.772.41-2.925 1.25-.877.64-2.07.64-2.946 0C7.374.91 6.395.5 5.602.5 2.776.5.5 2.776.5 5.602c0 2.632 3.052 6.505 9.184 11.5.184.15.448.15.632 0 6.132-4.995 9.184-8.868 9.184-11.5C19.5 2.776 17.224.5 14.398.5z"
+        style={
+          Object {
+            "fill": "none",
+            "stroke": "#000000",
+            "strokeWidth": undefined,
+          }
+        }
+      />
+    </svg>
+  </i>
+</button>
+`;
