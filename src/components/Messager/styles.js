@@ -4,19 +4,24 @@ const Wrapper = styled.div`
   background-color: #fafafa;
   height: 100%;
   left: 0;
+  opacity: 0;
+  pointer-events: none;
   position: fixed;
   top: 0;
-  transform: translateY(100%);
-  transition: transform .195s ease-out;
+  transform: translateY(64px);
+  ${'' /* transition: opacity .195s ease-in, transform .225s ease-out; */}
   width: 100%;
-  will-change: transform;
+  will-change: opacity, transform;
   z-index: 6;
 
   &.entering {
-    transform: translateY(100%);
+    opacity: 0;
+    transform: translateY(64px);
   }
 
   &.entered {
+    opacity: 1;
+    pointer-events: auto;
     transform: none;
   }
 
@@ -27,7 +32,9 @@ const Wrapper = styled.div`
     .c-btn--minimize {
       background-color: #242424;
       color: #fff;
-      transform: translateX(100vw) translateX(-64px) translateY(-120px);
+      left: auto;
+      right: 0;
+      transform: translateY(-120px);
     }
   }
 
@@ -46,7 +53,7 @@ const Wrapper = styled.div`
     left: 0;
     margin: 8px;
     top: 0;
-    transition: all .195s ease-out;
+    ${'' /* transition: all .195s .225s ease-out; */}
     width: 48px;
 
     svg {

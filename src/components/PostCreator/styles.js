@@ -4,19 +4,24 @@ const Wrapper = styled.div`
   background-color: #fafafa;
   height: 100%;
   left: 0;
+  opacity: 0;
+  pointer-events: none;
   position: fixed;
   top: 0;
-  transform: translateY(100%);
-  transition: transform .195s ease-out;
+  transform: translateY(64px);
+  ${'' /* transition: opacity .195s ease-out, transform .195s ease-out; */}
   width: 100%;
-  will-change: transform;
+  will-change: opacity, transform;
   z-index: 6;
 
   &.entering {
-    transform: translateY(100%);
+    opacity: 0;
+    transform: translateY(64px);
   }
 
   &.entered {
+    opacity: 1;
+    pointer-events: auto;
     transform: none;
   }
 
