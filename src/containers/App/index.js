@@ -66,8 +66,11 @@ class App extends Component {
           </Button>
         </Filter>
         <Main className="c-app-main">
-          <Post />
-          <Post />
+        {
+          [...Array(10).keys()].map((_, idx) =>
+            <Post key={idx} />
+          )
+        }
         </Main>
         <Footer className="c-app-footer">
           <MobileNav />
