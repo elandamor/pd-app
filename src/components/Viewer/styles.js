@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  align-items: stretch;
   background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   left: 0;
   position: fixed;
@@ -14,6 +17,8 @@ const Wrapper = styled.div`
     border-bottom: thin solid #e8e8e8;
     box-shadow: 0 1px 5px #e8e8e8;
     height: 64px;
+    min-height: 64px;
+    width: 100%;
     z-index: 2;
   }
 
@@ -32,7 +37,7 @@ const Wrapper = styled.div`
   }
 
   section {
-    height: calc(100% - 120px);
+    height: 100%;
     overflow-y: auto;
     padding: 8px;
     z-index: 0;
@@ -40,10 +45,7 @@ const Wrapper = styled.div`
 
   footer {
     background-color: #ffffff;
-    bottom: 0;
     box-shadow: 0 -1px 5px #e8e8e8;
-    min-height: 48px;
-    position: absolute;
     width: 100%;
     z-index: 1;
   }
