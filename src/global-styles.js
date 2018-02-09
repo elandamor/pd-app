@@ -45,6 +45,23 @@ injectGlobal`
     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
   }
 
+  #c-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 5;
+
+    &.-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
   [href] {
     color: inherit;
     text-decoration: none;
