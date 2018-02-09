@@ -1,6 +1,6 @@
 /**
  *
- * Modal.js
+ * Portal.js
  *
  */
 
@@ -9,16 +9,36 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 const modalContainer = document.getElementById('c-modal-container');
+const modalOverlay = document.getElementById('c-modal-overlay');
 
-class Modal extends Component {
+class Portal extends Component {
   constructor(props) {
     super(props);
-
     this.el = document.createElement('div');
+
+    this.el.className = `c-modal${props.className}`;
+
+    this.el.setAttribute('role', 'dialog');
+    this.el.setAttribute('aria-labelledby', 'dialog-title');
+    this.el.setAttribute('aria-describedby', 'dialog-description');
   }
 
   componentDidMount = () => {
     modalContainer.appendChild(this.el);
+  }
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.className !== this.props.className) {
+      this.el.className = `c-modal${this.props.className}`;
+
+      if (this.el.classList.contains('entering')) {
+        modalOverlay.className = '-active';
+      }
+
+      if (this.el.classList.contains('exiting')) {
+        modalOverlay.className = '-inactive';
+      }
+    }
   }
 
   componentWillUnmount = () => {
@@ -41,8 +61,8 @@ class Modal extends Component {
   }
 }
 
-Modal.propTypes = {
+Portal.propTypes = {
   children: PropTypes.any,
 };
 
-export default Modal;
+export default Portal;
