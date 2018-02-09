@@ -13,6 +13,7 @@ import FeedFilter from '../../components/Filter/Loadable';
 import Modal from '../../components/Modal/Loadable';
 import Post from '../../components/Post/Loadable';
 import Product from '../../components/Product/Loadable';
+import Service from '../../components/Service/Loadable';
 // Styled-Components
 import Wrapper, { Filter } from './styles';
 
@@ -31,7 +32,9 @@ class Home extends React.Component {
         <Filter>
           <Modal
             trigger={(
-              <Button aria-label="Filter">
+              <Button
+                aria-label="Filter"
+              >
                 <span className="placeholder">
                   <Icon icon={ICONS.FILTER} />
                   <span>Filter</span>
@@ -43,16 +46,9 @@ class Home extends React.Component {
           </Modal>
         </Filter>
         <div className="c-feed">
-        {
-          [...Array(1).keys()].map((_, idx) =>
-            <Post key={idx} />
-          )
-        }
-        {
-          [...Array(1).keys()].map((_, idx) =>
-            <Product key={idx} />
-          )
-        }
+          <Post />
+          <Product />
+          <Service />
         </div>
       </Wrapper>
     );
