@@ -39,6 +39,7 @@ const Wrapper = styled.div`
   }
 
   header {
+    background-color: #ffffff;
     border-bottom: thin solid #e8e8e8;
     box-shadow: 0 1px 5px #e8e8e8;
     height: 64px;
@@ -83,6 +84,7 @@ const Wrapper = styled.div`
   }
 
   footer {
+    background-color: #ffffff;
     bottom: 0;
     box-shadow: 0 -1px 5px #e8e8e8;
     height: 56px;

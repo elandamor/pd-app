@@ -26,6 +26,7 @@ injectGlobal`
     -moz-osx-font-smoothing: grayscale;
     -moz-font-feature-settings: 'liga', 'kern' 1;
     -webkit-font-smoothing: antialiased;
+    background-color: #fafafa;
     font-kerning: normal;
     font-weight: 400;
     height: 100%;

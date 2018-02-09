@@ -17,7 +17,6 @@ const Wrapper = styled(Card)`
     }
 
     &__main {
-      display: none;
       min-height: 80px;
     }
   }
@@ -28,13 +27,50 @@ const Wrapper = styled(Card)`
 
     .c-user {
       flex: 1;
-      visibility: hidden;
+      ${'' /* visibility: hidden; */}
+
+      .c-avatar {
+        background-color: #e8e8e8;
+      }
+    }
+  }
+
+  .c-post__main {
+    background-color: #e8e8e8;
+    position: relative;
+    text-indent: -99999px;
+
+    figure {
+      border: none;
+      border-radius: 0;
+      display: block;
+      margin: 0;
+    }
+
+    figcaption {
+      ${'' /* background-color: ${(props) => props.theme.palette.cardBackground}; */}
+      color: ${(props) => props.theme.isDark ? '#fff' : '#000'};
+      font-size: 14px;
+      font-weight: 500;
+      padding: 4px 12px;
+      position: relative;
+      z-index: 1;
+
+      [href] {
+        color: ${(props) => props.theme.isDark ? '#78bcff' : '#003569'};
+        color: ${(props) => props.theme.isDark ? '#78bcff' : '#004f9c'};
+      }
+
+      &.fontSize {
+        &-18 {
+          font-size: 18px;
+        }
+      }
     }
   }
 
   .c-post__footer {
     display: flex;
-    display: none;
     justify-content: space-between;
 
     .c-date {
@@ -45,12 +81,10 @@ const Wrapper = styled(Card)`
     }
 
     .c-btn--like {
-      visibility: hidden;
-
       .icon,
       svg {
-        height: 22px;
-        width: 20px;
+        height: 20px;
+        width: 18px;
       }
     }
   }
