@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { withApollo } from 'react-apollo';
+import { Switch, Route } from 'react-router-dom';
 // Components
-import Button from '../../components/Button';
 import Header from '../../components/Header';
-import Icon from '../../components/Icon';
-import { ICONS } from '../../components/Icon/constants';
 import MobileNav from '../../components/MobileMainNav';
-import Post from '../../components/Post/Loadable';
-// import Product from '../../components/Product/Loadable';
+import Viewer from '../../components/Viewer';
+// Pages
+import Explore from '../../pages/Explore/Loadable';
+import Home from '../../pages/Home/Loadable';
+import Messages from '../../pages/Messages/Loadable';
+import Notifications from '../../pages/Notifications/Loadable';
 // Styled-Components
-import Wrapper, { Filter, Footer, Main } from './styles';
+import Wrapper, { Footer, Main } from './styles';
 
 const GET_AUTHENTICATED_USER = gql`
   query getAuthenticatedUser {
@@ -57,20 +59,40 @@ class App extends Component {
     return (
       <Wrapper className="c-app-container">
         <Header className="c-app-header"></Header>
-        <Filter>
-          <Button aria-label="Filter">
-            <span className="placeholder">
-              <Icon icon={ICONS.FILTER} />
-              <span>Filter</span>
-            </span>
-          </Button>
-        </Filter>
         <Main className="c-app-main">
-        {
-          [...Array(10).keys()].map((_, idx) =>
-            <Post key={idx} />
-          )
-        }
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={(props) => (
+                <Home {...props} />
+              )}
+            />
+            <Route
+              path="/f"
+              render={(props) => (
+                <Viewer {...props} />
+              )}
+            />
+            <Route
+              path="/explore"
+              render={(props) => (
+                <Explore {...props} />
+              )}
+            />
+            <Route
+              path="/messages"
+              render={(props) => (
+                <Messages {...props} />
+              )}
+            />
+            <Route
+              path="/notifications"
+              render={(props) => (
+                <Notifications {...props} />
+              )}
+            />
+          </Switch>
         </Main>
         <Footer className="c-app-footer">
           <MobileNav />
