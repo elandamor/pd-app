@@ -36,6 +36,8 @@ class Like extends React.Component {
     return (
       <Wrapper
         className={`c-btn--like${isChecked ? ' is-liked' : ''}`}
+        role="checkbox"
+        aria-checked={isChecked}
         {...this.props}
       >
         { count > 0 && <span>{count}</span> }
