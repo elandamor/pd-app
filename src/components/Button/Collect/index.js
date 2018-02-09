@@ -24,7 +24,7 @@ class Collect extends React.Component {
 
     return (
       <Wrapper
-        className={`c-bttn__collect${isChecked ? ' is-collected' : ''}`}
+        className={`c-btn--collect${isChecked ? ' is-collected' : ''}`}
         {...this.props}
       >
         {

@@ -4,6 +4,7 @@
  */
 
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 // Components
 import ComposeMessage from '../Button/ComposeMessage';
@@ -17,11 +18,14 @@ import Wrapper from './styles';
 class Post extends Component {
   render() {
     const {
+      postId,
       postDate,
+      postDescription,
       postedBy
     } = {
+      postId: Math.round(Math.random() * 1000000),
       postDate: 'about 3 hours ago',
-      postDescription: 'Often emulated. But never matched. #Phantom is the original.',
+      postDescription: 'Enhanced with cutting-edge technology, #RollsRoycePhantom is the epitome of contemporary luxury.',
       postedBy: {
         id: 1,
         avatar: '',
@@ -47,7 +51,17 @@ class Post extends Component {
             <Messager />
           </Modal>
         </header>
-        <section className="c-post__main"></section>
+        <section className="c-post__main">
+          <Link
+            to={{
+              pathname: `/f/post/${postId}`
+            }}
+          >
+            <figure>
+              <figcaption className={postDescription.length < 140 ? 'fontSize-18' : ''}>{postDescription}</figcaption>
+            </figure>
+          </Link>
+        </section>
         <footer className="c-post__footer">
           <time
             className="c-date"
@@ -57,7 +71,7 @@ class Post extends Component {
           </time>
           <div className="c-actions">
             <Like
-              aria-checked={true}
+              aria-checked={false}
               data-count={0}
               data-themed={false}
             />
