@@ -37,8 +37,16 @@ class Viewer extends Component {
                 maxRows={6}
               />
               <div className="c-actions">
-                <Button className="c-btn c-btn--toggle">Leave a comment</Button>
-                <Button className="c-btn c-btn--send" />
+                <Button
+                  className="c-btn c-btn--toggle"
+                  aria-label="Toggle"
+                >
+                  Leave a comment
+                </Button>
+                <Button
+                  className="c-btn c-btn--send"
+                  aria-label="Send"
+                />
               </div>
             </div>
           </div>
