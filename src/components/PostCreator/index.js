@@ -18,6 +18,7 @@ class PostCreator extends Component {
         <header>
           <Button
             className="c-btn--close"
+            aria-label="Close"
             onClick={onClose}
           >
             <Icon icon={ICONS.CLOSE} />

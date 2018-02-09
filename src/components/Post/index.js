@@ -71,6 +71,7 @@ class Post extends Component {
           </time>
           <div className="c-actions">
             <Like
+              aria-label="Like"
               aria-checked={false}
               data-count={0}
               data-themed={false}
