@@ -14,9 +14,10 @@ const modalOverlay = document.getElementById('c-modal-overlay');
 class Portal extends Component {
   constructor(props) {
     super(props);
+
     this.el = document.createElement('div');
 
-    this.el.className = `c-modal${props.className}`;
+    this.el.className = `c-modal${props.className || ''}`;
 
     this.el.setAttribute('role', 'dialog');
     this.el.setAttribute('aria-labelledby', 'dialog-title');
