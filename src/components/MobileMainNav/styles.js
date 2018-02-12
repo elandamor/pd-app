@@ -24,9 +24,27 @@ const Wrapper = styled.nav`
     flex-grow: 1;
     height: 56px;
     justify-content: space-around;
-    opacity: 0;
+    ${'' /* opacity: 0; */}
     position: relative;
     width: 20vw;
+
+    &.-active {
+      &:after {
+        background-color: ${(props) => props.theme.isDark ? '#ffffff' : '#000000'};
+        bottom: 0;
+        content: '';
+        height: 4px;
+        left: 0;
+        margin: 0 auto;
+        position: absolute;
+        right: 0;
+        width: 24px;
+      }
+
+      .icon > svg {
+        fill: currentColor;
+      }
+    }
   }
 
   .c-btn--add-wrapper {
