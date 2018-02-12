@@ -75,4 +75,9 @@ injectGlobal`
   [readonly] {
     opacity: .5;
   }
+
+  .sr-only {
+    opacity: 0;
+    position: absolute;
+  }
 `;
