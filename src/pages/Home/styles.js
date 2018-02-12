@@ -43,8 +43,8 @@ const Filter = styled.div`
       }
 
       span {
-        display: inline-block;
         display: none;
+        font-size: 14px;
         margin-left: 8px;
       }
     }

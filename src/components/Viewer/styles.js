@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   height: 100%;
   left: 0;
+  overflow: hidden;
   position: fixed;
   top: 0;
   width: 100%;
