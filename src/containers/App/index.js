@@ -5,7 +5,6 @@ import { Switch, Route } from 'react-router-dom';
 // Components
 import Header from '../../components/Header';
 import MobileNav from '../../components/MobileMainNav';
-import Viewer from '../../components/Viewer';
 // Pages
 import Explore from '../../pages/Explore/Loadable';
 import Home from '../../pages/Home/Loadable';
@@ -71,7 +70,7 @@ class App extends Component {
             <Route
               path="/f"
               render={(props) => (
-                <Viewer {...props} />
+                <Home {...props} />
               )}
             />
             <Route

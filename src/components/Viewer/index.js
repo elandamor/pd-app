@@ -9,7 +9,17 @@ import Textarea from '../Textarea';
 // Styled-Components
 import Wrapper from './styles';
 
+const modalOverlay = document.getElementById('c-modal-overlay');
+
 class Viewer extends Component {
+  componentWillMount = () => {
+    modalOverlay.className = '-active';
+  }
+
+  componentWillUnmount = () => {
+    modalOverlay.className = '-inactive';
+  }
+
   render() {
     const { className, history } = this.props;
 
