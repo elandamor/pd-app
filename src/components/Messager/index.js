@@ -7,20 +7,33 @@ import { ICONS } from '../Icon/constants';
 // Styled-Components
 import Wrapper from './styles';
 
+const modalOverlay = document.getElementById('c-modal-overlay');
+
 class Messager extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       minimized: false,
-    }
+    };
   }
 
   handleMinimize = () => {
     this.setState({
       minimized: !this.state.minimized,
-    })
+    });
   }
+
+  componentDidUpdate = () => {
+    if (this.state.minimized) {
+      modalOverlay.className = '-inactive';
+    } else if (
+      !this.state.minimized && this.props.className.trim() !== 'exited'
+    ) {
+      modalOverlay.className = '-active';
+    }
+  }
+
 
   render() {
     const { className, onClose } = this.props;
