@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { withApollo } from 'react-apollo';
 import { Switch, Route } from 'react-router-dom';
 // Components
+import AccountMenu from '../../components/AccountMenu/Loadable';
 import Header from '../../components/Header';
 import MobileNav from '../../components/MobileMainNav';
 // Pages
@@ -55,9 +56,19 @@ class App extends Component {
   }
 
   render() {
+    const authenticatedUser = {
+      id: 1,
+      name: 'Thandolwethu Mpofu',
+      username: 'elandamor',
+    };
+
     return (
       <Wrapper className="c-app-container">
-        <Header className="c-app-header"></Header>
+        <Header className="c-app-header">
+          <AccountMenu
+            authenticatedUser={authenticatedUser}
+          />
+        </Header>
         <Main className="c-app-main">
           <Switch>
             <Route
