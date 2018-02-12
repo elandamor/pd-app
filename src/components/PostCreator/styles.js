@@ -26,11 +26,41 @@ const Wrapper = styled.div`
   }
 
   header {
+    align-items: center;
     background-color: #ffffff;
     border-bottom: thin solid #e8e8e8;
     box-shadow: 0 1px 5px #e8e8e8;
+    display: flex;
     height: 64px;
     z-index: 2;
+  }
+
+  .c-dropdown {
+    align-items: center;
+    flex-direction: row;
+
+    .label {
+      display: inline-block;
+      font-size: 22px;
+      font-weight: bold;
+      position: relative;
+      text-transform: lowercase;
+    }
+
+    [role="button"] {
+      font-size: 24px;
+      font-weight: bold;
+      padding: 0 24px 0 0;
+      position: relative;
+
+      .c-icon-wrapper {
+        bottom: 2px;
+      }
+    }
+
+    &__list {
+      top: 16px;
+    }
   }
 
   section {
