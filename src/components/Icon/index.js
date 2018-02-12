@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 
 const Icon = (props) => {
   const styles = {
-    default: {
-      margin: '0 auto',
-      position: 'relative',
-    },
     path: {
       fill: props.fill,
       stroke: props.stroke,
@@ -15,7 +11,7 @@ const Icon = (props) => {
   };
 
   return (
-    <i className="icon" aria-hidden="true" style={styles.default}>
+    <i className="icon" aria-hidden="true">
       <svg style={styles.svg} width={`${props.size}`} height={`${props.size}`} viewBox={`${props.viewBox}`}>
         <path style={styles.path} d={props.icon}></path>
       </svg>
