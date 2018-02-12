@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // Components
-// import Icon from '../Icon';
-// import { ICONS } from '../Icon/constants';
+import Icon from '../Icon';
+import { ICONS } from '../Icon/constants';
 // Styled-Components
 import Wrapper from './styles';
 
@@ -48,62 +48,51 @@ class Dropdown extends React.Component {
   }
 
   render() {
+    const { label, name, options } = this.props;
     const { isExpanded, selected } = this.state;
+
+    const mappedOptions = options && options.length > 0 && options.map((option) => {
+      return (
+        <li
+          key={option.value.toString()}
+          role="option"
+          tabIndex="0"
+          aria-selected={selected.value === option.value}
+          data-option-name={option.name}
+          data-option-value={option.value}
+          onClick={this.handleChange}
+        >
+          {option.name}
+        </li>
+      );
+    });
 
     return (
       <Wrapper>
         <div
-          id="dd-tasks"
+          id={`dd-${name}`}
           className="label"
         >
-          Add
+          {label}
         </div>
         <div
           className="c-bttn"
           role="button"
           aria-expanded={isExpanded}
-          aria-labelledby="dd-tasks"
+          aria-labelledby={`dd-${name}`}
           tabIndex="0"
           onClick={this.handleToggle}
         >
           {selected.name}
+          <Icon icon={ICONS.EXPAND_ARROW} viewBox="0 0 20 12" />
         </div>
         <ul
           className={`c-dropdown__list`}
-          data-dropdown-list="tasks"
-          aria-labelledby="dd-tasks"
+          data-dropdown-list={name}
+          aria-labelledby={`dd-${name}`}
           role="listbox"
         >
-          <li
-            role="option"
-            tabIndex="0"
-            aria-selected={selected.value === 'post'}
-            data-option-name="Post"
-            data-option-value="post"
-            onClick={this.handleChange}
-          >
-            Post
-          </li>
-          <li
-            role="option"
-            tabIndex="0"
-            aria-selected={selected.value === 'product'}
-            data-option-name="Product"
-            data-option-value="product"
-            onClick={this.handleChange}
-          >
-            Product
-          </li>
-          <li
-            role="option"
-            tabIndex="0"
-            aria-selected={selected.value === 'service'}
-            data-option-name="Service"
-            data-option-value="service"
-            onClick={this.handleChange}
-          >
-            Service
-          </li>
+          {mappedOptions}
         </ul>
       </Wrapper>
     );
