@@ -1,87 +1,105 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 // Components
-import Icon from '../Icon';
-import { ICONS } from '../Icon/constants';
+// import Icon from '../Icon';
+// import { ICONS } from '../Icon/constants';
+// Styled-Components
+import Wrapper from './styles';
 
-const Wrapper = styled.div`
-  label {
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.01rem;
-    margin: 0 12px;
+class Dropdown extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isExpanded: false,
+      selected: {
+        name: 'Post',
+        value: 'post',
+      },
+    };
   }
 
-  .c-select {
-    position: relative;
+  handleSelect = (evt) => {
+    const target = evt.target;
 
-    .icon, svg {
-      height: 6px;
-      width: 14px;
-    }
+    this.setState({
+      selected: {
+        name: target.getAttribute('data-option-name'),
+        value: target.getAttribute('data-option-value'),
+      },
+    });
 
-    .icon {
-      bottom: 17px;
-      display: flex;
-      position: absolute !important;
-      right: 12px;
-    }
-
-    svg {
-      vertical-align: inherit;
-    }
+    this.handleToggle();
   }
 
-  select {
-    -webkit-appearance: none;
-    background-color: ${(props) => props.theme.palette.cardBackground};
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.01rem;
-    line-height: 1.5;
-    margin: 4px 0 2px;
-    outline: none;
-    padding: 8px 12px;
-    text-overflow: ellipsis;
-    width: 100%;
+  handleToggle = () => {
+    this.setState({
+      isExpanded: !this.state.isExpanded,
+    });
   }
-`;
 
-const Dropdown = (props) => {
-  const { id, label, name, value } = props;
+  render() {
+    const { isExpanded, selected } = this.state;
 
-  const defaultOption = {
-    node: {
-      id: -1,
-      name: props.placeholder || 'Select',
-    },
-  };
-  const options = [defaultOption, ...props.options];
-
-  const filteredOptions = options && options.length > 0 && options.map((option) => {
-    const node = option.node;
-
-    return node.id !== -1 ? (
-      <option key={node.id} value={node.id}>{node.name}</option>
-    ) : (
-      <option key={node.id} value={node.id}>{node.name}</option>
+    return (
+      <Wrapper>
+        <div
+          id="dd-tasks"
+          className="label"
+        >
+          Add
+        </div>
+        <div
+          className="c-bttn"
+          role="button"
+          aria-expanded={isExpanded}
+          aria-labelledby="dd-tasks"
+          tabIndex="0"
+          onClick={this.handleToggle}
+        >
+          {selected.name}
+        </div>
+        <ul
+          className={`c-dropdown__list`}
+          data-dropdown-list="tasks"
+          aria-labelledby="dd-tasks"
+          role="listbox"
+        >
+          <li
+            role="option"
+            tabIndex="0"
+            aria-selected={selected.value === 'post'}
+            data-option-name="Post"
+            data-option-value="post"
+            onClick={this.handleSelect}
+          >
+            Post
+          </li>
+          <li
+            role="option"
+            tabIndex="0"
+            aria-selected={selected.value === 'product'}
+            data-option-name="Product"
+            data-option-value="product"
+            onClick={this.handleSelect}
+          >
+            Product
+          </li>
+          <li
+            role="option"
+            tabIndex="0"
+            aria-selected={selected.value === 'service'}
+            data-option-name="Service"
+            data-option-value="service"
+            onClick={this.handleSelect}
+          >
+            Service
+          </li>
+        </ul>
+      </Wrapper>
     );
-  });
-
-  return (
-    <Wrapper className="c-input__wrapper">
-      <label htmlFor={id}>{label}</label>
-      <div className="c-select">
-        <select id={id} name={name} value={value} onChange={props.onChange}>
-          {filteredOptions}
-        </select>
-        <Icon icon={ICONS.EXPAND_ARROW} viewBox="0 0 20 12" />
-      </div>
-    </Wrapper>
-  );
-};
+  }
+}
 
 Dropdown.defaultProps = {
   options: [],
@@ -89,11 +107,12 @@ Dropdown.defaultProps = {
 
 Dropdown.propTypes = {
   id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
   placeholder: PropTypes.string,
+  srLabel: PropTypes.string,
   value: PropTypes.any,
 };
 
