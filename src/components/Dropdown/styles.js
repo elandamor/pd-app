@@ -3,36 +3,41 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 1rem 1rem 0;
+  margin: 0 1rem 0;
   position: relative;
   width: 14.3rem;
 
   .label {
-    font-size: .8rem;
+    font-size: 14px;
     color: #76766f;
-    z-index: 2;
-    top: .5rem;
-    left: .5rem;
+    top: 0;
+    left: 0;
     position: absolute;
   }
 
   [role="button"] {
-    cursor: pointer;
-    padding: 1.4rem 2.5rem .2em .5rem;
-    line-height: 2rem;
-    position: relative;
-    transition: all .2s;
-    z-index: 5;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    border-bottom: 1px solid #e8e8e8;
-    color: #e90052;
-    min-height: 40px;
+    font-size: 16px;
+    padding-top: 24px;
+
+    &[aria-expanded="true"] .icon > svg {
+      transform: rotate(180deg);
+    }
 
     &[aria-expanded="true"] ~ .c-dropdown__list {
       transform: none;
       visibility: visible;
+    }
+
+    .c-icon-wrapper {
+      bottom: 10px;
+      position: absolute;
+      right: 0;
+    }
+
+    .icon,
+    svg {
+      height: 10px;
+      width: 18px;
     }
   }
 
@@ -65,8 +70,8 @@ const Wrapper = styled.div`
     }
 
     &[aria-selected="true"] {
-      background-color: #e90052;
-      color: #fff;
+      background-color: #000000;
+      color: #ffffff;
     }
   }
 `;
