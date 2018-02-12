@@ -48,7 +48,7 @@ class Dropdown extends React.Component {
   }
 
   render() {
-    const { label, name, options } = this.props;
+    const { className, label, name, options } = this.props;
     const { isExpanded, selected } = this.state;
 
     const mappedOptions = options && options.length > 0 && options.map((option) => {
@@ -68,7 +68,9 @@ class Dropdown extends React.Component {
     });
 
     return (
-      <Wrapper>
+      <Wrapper
+        className={`c-dropdown${className ? ' ' + className : ''}`}
+      >
         <div
           id={`dd-${name}`}
           className="label"
@@ -76,7 +78,7 @@ class Dropdown extends React.Component {
           {label}
         </div>
         <div
-          className="c-bttn"
+          className="c-btn"
           role="button"
           aria-expanded={isExpanded}
           aria-labelledby={`dd-${name}`}
@@ -84,7 +86,12 @@ class Dropdown extends React.Component {
           onClick={this.handleToggle}
         >
           {selected.name}
-          <Icon icon={ICONS.EXPAND_ARROW} viewBox="0 0 20 12" />
+          <span className="c-icon-wrapper">
+            <Icon
+              icon={ICONS.EXPAND_ARROW}
+              viewBox="0 0 20 12"
+            />
+          </span>
         </div>
         <ul
           className={`c-dropdown__list`}
@@ -104,6 +111,7 @@ Dropdown.defaultProps = {
 };
 
 Dropdown.propTypes = {
+  className: PropTypes.string,
   id: PropTypes.string.isRequired,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
