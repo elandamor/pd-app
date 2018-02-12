@@ -10,16 +10,20 @@ class Dropdown extends React.Component {
   constructor(props) {
     super(props);
 
+    const selected = props.selected || {
+      name: props.label || props.srLabel || 'Choose an option...',
+      value: -1,
+    };
+
     this.state = {
       isExpanded: false,
-      selected: {
-        name: 'Post',
-        value: 'post',
-      },
+      selected,
     };
+
+    props.onChange(this.state.selected);
   }
 
-  handleSelect = (evt) => {
+  handleChange = (evt) => {
     const target = evt.target;
 
     this.setState({
@@ -30,6 +34,11 @@ class Dropdown extends React.Component {
     });
 
     this.handleToggle();
+
+    this.props.onChange({
+      name: target.getAttribute('data-option-name'),
+      value: target.getAttribute('data-option-value'),
+    });
   }
 
   handleToggle = () => {
@@ -71,7 +80,7 @@ class Dropdown extends React.Component {
             aria-selected={selected.value === 'post'}
             data-option-name="Post"
             data-option-value="post"
-            onClick={this.handleSelect}
+            onClick={this.handleChange}
           >
             Post
           </li>
@@ -81,7 +90,7 @@ class Dropdown extends React.Component {
             aria-selected={selected.value === 'product'}
             data-option-name="Product"
             data-option-value="product"
-            onClick={this.handleSelect}
+            onClick={this.handleChange}
           >
             Product
           </li>
@@ -91,7 +100,7 @@ class Dropdown extends React.Component {
             aria-selected={selected.value === 'service'}
             data-option-name="Service"
             data-option-value="service"
-            onClick={this.handleSelect}
+            onClick={this.handleChange}
           >
             Service
           </li>
@@ -112,6 +121,7 @@ Dropdown.propTypes = {
   onChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
   placeholder: PropTypes.string,
+  selected: PropTypes.object,
   srLabel: PropTypes.string,
   value: PropTypes.any,
 };
