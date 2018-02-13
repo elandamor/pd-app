@@ -4,11 +4,17 @@
  */
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
+import * as linkify from 'linkifyjs';
+import Linkify from 'linkifyjs/react';
+import hashtag from 'linkifyjs/plugins/hashtag';
+import mention from 'linkifyjs/plugins/mention';
+import numeral from 'numeral';
 // Components
 import Collect from '../Button/Collect';
 import ComposeMessage from '../Button/ComposeMessage';
+import Image from '../Image';
 import Like from '../Button/Like';
 import Messager from '../Messager/Loadable';
 import Modal from '../Modal/Loadable';
@@ -18,18 +24,52 @@ import AddToCollection from '../../containers/AddToCollection/Loadable';
 // Styled-Components
 import Wrapper from './styles';
 
+hashtag(linkify);
+mention(linkify);
+
 class Product extends Component {
+  onLinkable = ({ evt, pathname }) => {
+    const { history } = this.props;
+    const target = evt.target;
+
+    let route = pathname;
+
+    const isHashtag = target.classList.contains('c-hashtag');
+    const isMention = target.classList.contains('c-mention');
+    const isLinkified = isHashtag || isMention;
+
+    if (isLinkified) {
+      route = `${evt.target.pathname}${evt.target.search}`;
+    }
+
+    history.push(route);
+  }
+
   render() {
     const {
       productId,
       productDate,
+      productName,
+      productPrice,
       productDescription,
-      productedBy
+      productImages,
+      postedBy
     } = {
       productId: Math.round(Math.random() * 1000000),
-      productDate: 'about 3 hours ago',
-      productDescription: 'Enhanced with cutting-edge technology, #RollsRoycePhantom is the epitome of contemporary luxury.',
-      productedBy: {
+      productDate: '2 days ago',
+      productName: 'Rolls-Royce Wraith Black Badge',
+      productPrice: '400000',
+      productDescription: 'With intensified power and presence, this is the ultimate incarnation of defiance. #BlackBadge',
+      productImages: [
+        {
+          id: Math.round(Math.random() * 1000000),
+          url: 'https://scontent-jnb1-1.cdninstagram.com/vp/2dec6590a6e141a1b064f6afb1affaa8/5B0FC8D5/t51.2885-15/e35/23823756_1754831771489837_6167951221811314688_n.jpg',
+        }, {
+          id: Math.round(Math.random() * 1000000),
+          url: 'https://www.standard.co.uk/s3fs-public/thumbnails/image/2017/06/01/15/rolls-royce-8.png',
+        }
+      ],
+      postedBy: {
         id: 1,
         avatar: '',
         name: 'Rolls-Royce Motor Cars',
@@ -37,13 +77,17 @@ class Product extends Component {
       }
     };
 
+    const inFeed = true;
+
+    const hasImages = productImages && productImages.length > 0;
+
     return (
       <Wrapper className="c-product">
         <header className="c-product__header">
           <User
-            avatar={productedBy.avatar}
-            name={productedBy.name}
-            username={productedBy.username}
+            avatar={postedBy.avatar}
+            name={postedBy.name}
+            username={postedBy.username}
           />
           <Modal
             trigger={(
@@ -55,19 +99,62 @@ class Product extends Component {
           </Modal>
         </header>
         <section className="c-product__main">
-          <Link
-            to={{
-              pathname: `/f/product/${productId}`
-            }}
+          <div
+            aria-label={`Open ${postedBy.name}'s product`}
+            onClick={(evt) => this.onLinkable({
+              evt,
+              pathname: inFeed
+                ? `/f/product/${productId}`
+                : `/@${postedBy.username}/products/${productId}`,
+            })}
           >
             <figure>
-              <figcaption
-                className={productDescription.length < 140 ? 'fontSize-18' : ''}
-              >
-                {productDescription}
+              {
+                hasImages && (
+                  <div
+                    className="c-image-wrapper"
+                  >
+                    <Image
+                      src={productImages[0].url}
+                      alt={`${postedBy.name}'s post image`}
+                      width="417"
+                      height="229"
+                    />
+                  </div>
+                )
+              }
+              <figcaption>
+                <div>
+                  <h2 className="name">{productName}</h2>
+                  <div className="c-metadata">
+                    <h3 className="price">
+                      <span className="currency">$</span>
+                      {numeral(productPrice).format()}
+                    </h3>
+                  </div>
+                </div>
+                <Linkify
+                  className={productDescription.length < 140 ? 'fontSize-18' : ''}
+                  options={{
+                    attributes: {
+                      onClick: (evt) => evt.preventDefault(),
+                      rel: 'nofollow me noopener noreferrer',
+                    },
+                    className: {
+                      hashtag: 'c-hashtag',
+                      url: 'c-url',
+                    },
+                    formatHref: {
+                      hashtag: (val) => `/search?q=${val.substr(1)}&src=hashtag_click`,
+                    },
+                    nl2br: true,
+                  }}
+                >
+                  {productDescription}
+                </Linkify>
               </figcaption>
             </figure>
-          </Link>
+          </div>
         </section>
         <footer className="c-product__footer">
           <time
