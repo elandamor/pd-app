@@ -98,11 +98,15 @@ class Post extends Component {
             <figure>
               {
                 hasImages && (
-                  <Image
-                    src={postImages[0].url}
-                    width="417"
-                    height="229"
-                  />
+                  <div
+                    className="c-image-wrapper"
+                  >
+                    <Image
+                      src={postImages[0].url}
+                      width="417"
+                      height="229"
+                    />
+                  </div>
                 )
               }
               <figcaption>

@@ -53,7 +53,7 @@ class Home extends React.Component {
         </Filter>
         <div className="c-feed">
           <Post {...this.props} />
-          <Product />
+          <Product {...this.props} />
           <Service />
         </div>
         <Switch>
