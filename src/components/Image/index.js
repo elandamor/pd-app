@@ -14,13 +14,15 @@ const fadeIn = keyframes`
 `;
 
 const Wrapper = styled.img`
+  height: auto;
+  width: 100%;
+
   &.lazy-image {
     ${'' /* background-color: ${(props) => props.theme.palette.cardBorderColor}; */}
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     border: none;
-    border-radius: 500rem;
     height: 100%;
     visibility: hidden;
     width: 100%;

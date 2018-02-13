@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   width: 100%;
   z-index: 6;
 
-  header {
+  .c-header--main {
     background-color: #ffffff;
     border-bottom: thin solid #e8e8e8;
     box-shadow: 0 1px 5px #e8e8e8;
@@ -37,18 +37,28 @@ const Wrapper = styled.div`
     }
   }
 
-  section {
+  .c-section--main {
+    -webkit-overflow-scrolling: touch;
+    background-color: #ffffff;
     height: 100%;
     overflow-y: auto;
-    padding: 8px;
     z-index: 0;
   }
 
-  footer {
+  .c-footer--main {
     background-color: #ffffff;
     box-shadow: 0 -1px 5px #e8e8e8;
     width: 100%;
     z-index: 1;
+  }
+
+  /*
+   * Post
+   */
+
+  .c-post {
+    border: none;
+    box-shadow: none;
   }
 
   /*
@@ -68,11 +78,13 @@ const Wrapper = styled.div`
 
     .c-textarea__wrapper {
       flex: 1;
-      margin: 6px 0 4px;
+      margin: 6px 6px 4px 0;
 
       textarea {
         border: thin solid #ededed;
+        color: #242424;
         font-size: 14px;
+        font-weight: 400;
         margin: 0;
         min-height: 32px;
         padding: 6px 8px;
@@ -98,7 +110,7 @@ const Wrapper = styled.div`
         background-color: #242424;
         border-radius: 4px;
         height: 32px;
-        margin: 8px 6px;
+        margin: 8px 6px 8px 2px;
         min-width: 64px;
       }
     }

@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// Styled-Components
+import Wrapper from './styles';
 
 const Icon = (props) => {
   const styles = {
@@ -11,11 +13,11 @@ const Icon = (props) => {
   };
 
   return (
-    <i className="icon" aria-hidden="true">
+    <Wrapper className="icon" aria-hidden="true">
       <svg style={styles.svg} width={`${props.size}`} height={`${props.size}`} viewBox={`${props.viewBox}`}>
         <path style={styles.path} d={props.icon}></path>
       </svg>
-    </i>
+    </Wrapper>
   );
 };
 

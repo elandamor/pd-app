@@ -36,9 +36,9 @@ const Wrapper = styled(Card)`
   }
 
   .c-post__main {
-    background-color: #e8e8e8;
+    ${'' /* background-color: #e8e8e8; */}
     position: relative;
-    text-indent: -99999px;
+    ${'' /* text-indent: -99999px; */}
 
     figure {
       border: none;
@@ -52,6 +52,7 @@ const Wrapper = styled(Card)`
       color: ${(props) => props.theme.isDark ? '#fff' : '#000'};
       font-size: 14px;
       font-weight: 500;
+      line-height: 1.5;
       padding: 4px 12px;
       position: relative;
       z-index: 1;
@@ -64,6 +65,7 @@ const Wrapper = styled(Card)`
       &.fontSize {
         &-18 {
           font-size: 18px;
+          font-weight: 400;
         }
       }
     }
@@ -75,9 +77,8 @@ const Wrapper = styled(Card)`
 
     .c-date {
       color: #242424;
-      font-size: 12px;
-      padding: 12px;
-      visibility: hidden;
+      font-size: 11px;
+      padding: 8px 12px 12px;
     }
 
     .c-btn--like {
