@@ -45,6 +45,17 @@ const Wrapper = styled(Card)`
       border-radius: 0;
       display: block;
       margin: 0;
+
+      .c-image-wrapper {
+        background-color: #e8e8e8;
+        padding-bottom: 100%;
+
+        img {
+          left: 0;
+          position: absolute;
+          top: 0;
+        }
+      }
     }
 
     figcaption {

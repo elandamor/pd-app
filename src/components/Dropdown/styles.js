@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 1rem 0;
+  margin: 0 8px 0;
   position: relative;
   width: 14.3rem;
 
@@ -54,14 +54,14 @@ const Wrapper = styled.div`
     transition: .1s;
     box-shadow: 0 2px 6px rgba(0,0,0,.2);
     border-radius: 0 0 2px 2px;
-    max-height: 28.5rem;
+    max-height: 200px;
     overflow-y: auto;
     padding: 0;
   }
 
   [role="option"] {
     color: #333;
-    padding: .8rem 1rem;
+    padding: 8px 8px;
     cursor: pointer;
     transition: all .2s;
 

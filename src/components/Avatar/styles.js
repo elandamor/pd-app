@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   align-items: center;
   ${'' /* background-color: ${(props) => props.theme ? props.theme.palette.cardBorderColor : '#ededed'}; */}
+  background-color: #e8e8e8;
   border-radius: 500rem;
   display: flex;
   height: 32px;

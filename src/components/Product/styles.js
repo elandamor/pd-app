@@ -28,23 +28,31 @@ const Wrapper = styled(Card)`
     .c-user {
       flex: 1;
       ${'' /* visibility: hidden; */}
-
-      .c-avatar {
-        background-color: #e8e8e8;
-      }
     }
   }
 
   .c-product__main {
-    background-color: #e8e8e8;
+    ${'' /* background-color: #e8e8e8; */}
     position: relative;
-    text-indent: -99999px;
+    ${'' /* text-indent: -99999px; */}
 
     figure {
       border: none;
       border-radius: 0;
       display: block;
       margin: 0;
+
+      .c-image-wrapper {
+        background-color: #e8e8e8;
+        padding-bottom: calc(100% / (16/10));
+        padding-bottom: 100%;
+
+        img {
+          left: 0;
+          position: absolute;
+          top: 0;
+        }
+      }
     }
 
     figcaption {
@@ -52,6 +60,7 @@ const Wrapper = styled(Card)`
       color: ${(props) => props.theme.isDark ? '#fff' : '#000'};
       font-size: 14px;
       font-weight: 500;
+      line-height: 1.5;
       padding: 4px 12px;
       position: relative;
       z-index: 1;
@@ -61,10 +70,22 @@ const Wrapper = styled(Card)`
         color: ${(props) => props.theme.isDark ? '#78bcff' : '#004f9c'};
       }
 
-      &.fontSize {
+      &.fontSize,
+      .fontSize {
         &-18 {
           font-size: 18px;
+          font-weight: 400;
         }
+      }
+
+      .name {
+        color: ${(props) => props.theme.isDark ? '#fff' : '#000'};
+        line-height: 1.25;
+        margin: 4px 0;
+      }
+
+      .price {
+        display: none;
       }
     }
   }
@@ -75,9 +96,8 @@ const Wrapper = styled(Card)`
 
     .c-date {
       color: #242424;
-      font-size: 12px;
-      padding: 12px;
-      visibility: hidden;
+      font-size: 11px;
+      padding: 8px 12px 12px;
     }
 
     .c-actions {
