@@ -19,6 +19,7 @@
     "graphql-tag": "^2.6.0",
     "linkifyjs": "^2.1.5",
     "localforage": "^1.5.5",
+    "numeral": "^2.0.6",
     "react": "^16.2.0",
     "react-apollo": "^2.0.4",
     "react-autosize-textarea": "^3.0.2",
