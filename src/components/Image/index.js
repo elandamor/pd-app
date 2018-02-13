@@ -14,6 +14,7 @@ const fadeIn = keyframes`
 `;
 
 const Wrapper = styled.img`
+  background-color: #e8e8e8;
   height: auto;
   width: 100%;
 
@@ -35,12 +36,13 @@ const Wrapper = styled.img`
   }
 `;
 
-const Image = ({ className, src }) => { // eslint-disable-line arrow-body-style
+const Image = ({ className, src, ...rest }) => { // eslint-disable-line arrow-body-style
   return (
     <Wrapper
       className={`c-image ${className || ''}`}
       data-src={src}
       src={src}
+      {...rest}
     />
   );
 };
