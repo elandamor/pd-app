@@ -64,7 +64,7 @@ const Wrapper = styled(Card)`
       font-size: 14px;
       font-weight: 500;
       line-height: 1.5;
-      padding: 4px 12px;
+      padding: 12px 12px 4px;
       position: relative;
       z-index: 1;
 

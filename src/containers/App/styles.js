@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   .c-app-header {
     background-color: #ffffff;
     border-bottom: thin solid #e8e8e8;
-    box-shadow: 0 1px 5px #e8e8e8;
+    ${'' /* box-shadow: 0 1px 5px #e8e8e8; */}
     height: 64px;
     left: 0;
     position: fixed;

@@ -7,7 +7,6 @@ const Wrapper = styled.ul`
 
 const Comment = styled.li`
   ${'' /* background-color: ${(props) => props.theme.palette.cardBackground}; */}
-  border-radius: 4px;
   border-bottom: thin solid #ededed;
   display: flex;
   flex-direction: column;
@@ -27,16 +26,6 @@ const Comment = styled.li`
     }
   }
 
-    .c-avatar {
-      ${'' /* background-color: ${(props) => props.theme.palette.cardBorderColor}; */}
-      background-color: #e8e8e8;
-      border-radius: 500rem;
-      height: 32px;
-      margin: 0 8px;
-      overflow: hidden;
-      width: 32px;
-    }
-
     .c-info {
       display: flex;
       flex: 1;
@@ -46,17 +35,19 @@ const Comment = styled.li`
       text-decoration: none;
 
       .a {
-        display: block;
-        font-size: 11px;
-        color: ${(props) => props.theme.isDark ? '#fff' : '#000'};
-        letter-spacing: 0.01rem;
-        line-height: 1.5;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        &-name,
+        &-username,
+        &-date {
+          font-size: 11px;
+          color: ${(props) => props.theme.isDark ? '#fff' : '#000'};
+          letter-spacing: 0.01rem;
+          line-height: 1.35;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
 
         &-name {
-          ${'' /* display: none; */}
           font-size: 13px;
           font-weight: 600;
           letter-spacing: 0.01rem;
@@ -85,7 +76,7 @@ const Comment = styled.li`
     color: ${(props) => props.theme.isDark ? '#ffffff' : '#242424'};
     font-size: 14px;
     font-weight: 400;
-    line-height: 1.35;
+    line-height: 1.5;
     margin: 6px 0 12px;
     padding: 0 12px 0;
 
