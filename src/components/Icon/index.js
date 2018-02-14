@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Wrapper from './styles';
 
 const Icon = (props) => {
+  const { className } = props;
+
   const styles = {
     path: {
       fill: props.fill,
@@ -13,8 +15,16 @@ const Icon = (props) => {
   };
 
   return (
-    <Wrapper className="icon" aria-hidden="true">
-      <svg style={styles.svg} width={`${props.size}`} height={`${props.size}`} viewBox={`${props.viewBox}`}>
+    <Wrapper
+      className={`icon${className ? ' ' + className : ''}`}
+      aria-hidden="true"
+    >
+      <svg
+        style={styles.svg}
+        width={`${props.size}`}
+        height={`${props.size}`}
+        viewBox={`${props.viewBox}`}
+      >
         <path style={styles.path} d={props.icon}></path>
       </svg>
     </Wrapper>
