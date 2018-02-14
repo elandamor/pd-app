@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as linkify from 'linkifyjs';
 import Linkify from 'linkifyjs/react';
@@ -6,13 +7,17 @@ import hashtag from 'linkifyjs/plugins/hashtag';
 import mention from 'linkifyjs/plugins/mention';
 import numeral from 'numeral';
 // Components
+import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
 import ComposeMessage from '../../components/Button/ComposeMessage';
+import Collect from '../../components/Button/Collect';
 import Dropdown from '../../components/Dropdown';
 import Icon from '../../components/Icon';
 import { ICONS } from '../../components/Icon/constants';
 import Image from '../../components/Image';
+import Like from '../../components/Button/Like';
 import Modal from '../../components/Modal';
+import Reviews from '../../components/Reviews';
 import User from '../../components/User';
 // Styled-Components
 import Wrapper, { Customiser } from './styles';
@@ -21,6 +26,61 @@ hashtag(linkify);
 mention(linkify);
 
 const modalOverlay = document.getElementById('c-modal-overlay');
+
+const reviews = {
+  data: [
+    {
+      id: Math.round(Math.random() * 1000000),
+      body: 'This is a test review with a @mention and #hashtag.',
+      postDate: '45 minutes ago',
+      reviewedBy: {
+        id: Math.round(Math.random() * 1000000),
+        name: 'Mercedes-Benz',
+        username: 'mercedesbenz',
+      },
+    },
+    {
+      id: Math.round(Math.random() * 1000000),
+      body: '#Phantom is indeed the original. Simply sublime!!!',
+      postDate: '30 minutes ago',
+      reviewedBy: {
+        id: Math.round(Math.random() * 1000000),
+        name: 'Thandolwethu Mpofu',
+        username: 'elandamor',
+      },
+    },
+    {
+      id: Math.round(Math.random() * 1000000),
+      body: '@mercedebenz, Thank you for the feedback.',
+      postDate: '15 minutes ago',
+      reviewedBy: {
+        id: Math.round(Math.random() * 1000000),
+        name: 'Rolls-Royce Motor Cars',
+        username: 'rollsroycecars',
+      },
+    },
+    {
+      id: Math.round(Math.random() * 1000000),
+      body: 'The undeniable allure of refined luxury - #RangeRover. Search "Range Rover test drive" to experience first class travel at its finest. #RangeRover #PHEV #HybridElectricVehicle #HybridSUV #Carsofinstagram #Technology #Luxury #LuxurySUV',
+      postDate: '7 minutes ago',
+      reviewedBy: {
+        id: Math.round(Math.random() * 1000000),
+        name: 'Land Rover',
+        username: 'landrover',
+      },
+    },
+    {
+      id: Math.round(Math.random() * 1000000),
+      body: 'This is a test review with a @mention and #hashtag.',
+      postDate: '5 minutes ago',
+      reviewedBy: {
+        id: Math.round(Math.random() * 1000000),
+        name: 'Mercedes-Benz',
+        username: 'mercedesbenz',
+      },
+    },
+  ],
+};
 
 const quantities = [...Array(10).keys()].map((key, idx) => {
   return {
@@ -115,8 +175,35 @@ class GetProduct extends Component {
             className="c-btn--close"
             onClick={() => history.goBack()}
           >
-            <Icon icon={ICONS.CLOSE} />
+            <Icon icon={ICONS.BACK} />
           </Button>
+          <div className="c-product-info">
+            <Link
+              to={{
+                pathname: `/@${postedBy.username}`,
+              }}
+            >
+              <Avatar
+                src={postedBy.avatar}
+              />
+              <div className="c-info">
+                <span className="a-owner">
+                  {postedBy.name}
+                </span>
+                <span className="a-product-name">
+                  {productName}
+                </span>
+              </div>
+            </Link>
+            <Modal
+              trigger={(
+                <ComposeMessage />
+              )}
+              unmountOnExit
+            >
+              <div />
+            </Modal>
+          </div>
         </header>
         <section className="c-section--main">
           <div className="c-product-owner">
@@ -146,9 +233,29 @@ class GetProduct extends Component {
               )
             }
           </div>
-          <div className="c-product-info" role="figcaption">
+          <div className="c-product-info">
             <h2 className="a-name">{productName}</h2>
             <div className="c-metadata"></div>
+            <div className="c-actions">
+              <Like
+                aria-label="Like"
+                aria-checked={false}
+                data-count={0}
+                data-themed={false}
+              />
+              <Modal
+                trigger={(
+                  <Collect
+                    aria-label="Collect"
+                    aria-checked={true}
+                    data-themed={false}
+                  />
+                )}
+                unmountOnExit
+              >
+                <div />
+              </Modal>
+            </div>
           </div>
           <div className="c-purchase-info">
             <h2 className="price">
@@ -207,6 +314,8 @@ class GetProduct extends Component {
           >
             {productDescription}
           </Linkify>
+          <h3>Reviews</h3>
+          <Reviews data={reviews.data} />
         </section>
       </Wrapper>
     );
