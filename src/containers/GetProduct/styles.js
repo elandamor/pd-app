@@ -23,13 +23,62 @@ const Wrapper = styled.div`
   }
 
   .c-header--main {
+    align-items: center;
     background-color: #ffffff;
     border-bottom: thin solid #e8e8e8;
-    ${'' /* box-shadow: 0 1px 5px #e8e8e8; */}
+    display: flex;
     height: 64px;
     min-height: 64px;
+    padding-left: 48px;
     width: 100%;
     z-index: 2;
+
+    .c-product-info {
+      align-items: center;
+      display: flex;
+      overflow: hidden;
+      padding: 0 8px 0 0;
+
+      a {
+        align-items: center;
+        display: flex;
+        overflow: hidden;
+        padding: 0 8px 0 0;
+      }
+
+      .c-info {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        margin: 0 auto;
+        overflow: hidden;
+        padding: 6px 0;
+        text-decoration: none;
+
+        span {
+          display: block;
+          font-size: 11px;
+          color: ${(props) => props.theme.isDark ? '#fff' : '#000'};
+          letter-spacing: 0.01rem;
+          line-height: 1.5;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          &.a-product-name {
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 0.01rem;
+            margin-bottom: -2px;
+          }
+
+          &.a-owner {
+            color: ${(props) => props.theme.isDark ? '#D3D4D8' : '#555'};
+            font-weight: 400;
+          }
+        }
+      }
+    }
   }
 
   .c-btn--close {
@@ -52,6 +101,10 @@ const Wrapper = styled.div`
     overflow-y: auto;
     padding-bottom: 104px;
     z-index: 0;
+
+    .c-product-owner {
+      display: none;
+    }
   }
 
   .c-product-owner {
@@ -85,9 +138,38 @@ const Wrapper = styled.div`
       margin: 0;
     }
 
-    .a-description {
-      line-height: 1.5;
-      margin: 12px 0;
+    .c-rating {
+      align-items: center;
+      display: flex;
+      margin-top: 12px;
+
+      .icon,
+      svg {
+        height: 16px;
+        width: 16px;
+      }
+    }
+
+    .c-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0 -12px 0 0;
+    }
+
+    .c-btn--like {
+      .icon,
+      svg {
+        height: 20px;
+        width: 18px;
+      }
+    }
+
+    .c-btn--collect {
+      .icon,
+      svg {
+        height: 18px;
+        width: 14px;
+      }
     }
   }
 
