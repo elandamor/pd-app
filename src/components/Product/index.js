@@ -116,7 +116,7 @@ class Product extends Component {
                   >
                     <Image
                       src={productImages[0].url}
-                      alt={`${postedBy.name}'s post image`}
+                      alt={productDescription}
                       width="417"
                       height="229"
                     />

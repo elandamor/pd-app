@@ -105,6 +105,7 @@ class Post extends Component {
                       src={postImages[0].url}
                       width="417"
                       height="229"
+                      alt={postDescription}
                     />
                   </div>
                 )
