@@ -1,31 +1,88 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  ${'' /* display: flex;
-  flex-direction: column;
-  padding: 64px 0 56px;
+  .a-heading--sub {
+    margin-left: 12px;
+  }
 
-  .c-suggestions {
-    padding: 8px;
-
-    .l-users {
-      background-color: #ffffff;
-      border: thin solid #ededed;
-      border-radius: 4px;
-
-      li {
-        border-bottom: thin solid #ededed;
-
-        &:last-child {
-          border: none;
-        }
+  .c-section {
+    &--discover {
+      .c-inner {
+        height: 140px;
+        overflow: hidden;
       }
     }
   }
+`;
 
-  @media (min-width: 648px) {
-    padding: 88px 0 0;
-  } */}
+const Suggestions = styled.ul`
+  -webkit-overflow-scrolling: touch;
+  align-items: center;
+  display: flex;
+  margin: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0 0 24px 0;
+  position: relative;
+
+  .vr {
+    visibility: hidden;
+  }
+`;
+
+const Suggestion = styled.li`
+  background-color: #ffffff;
+  border: thin solid #e8e8e8;
+  border-radius: 4px;
+  list-style-type: none;
+  margin: 0 12px 0 0;
+  min-width: 120px;
+  width: 100px;
+
+  &:first-child {
+    margin-left: 12px;
+  }
+
+  &:last-child {
+    margin-right: 12px;
+  }
+
+  .c-user {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+
+
+    .c-avatar {
+      height: 48px;
+      margin-bottom: 0;
+      width: 48px;
+    }
+
+    .c-info {
+      text-align: center;
+      overflow: hidden;
+      width: 100%;
+    }
+  }
+
+  .c-bttn__follow {
+    border-radius: 0;
+    border: none;
+    border-top: thin solid #e8e8e8;
+    height: 32px;
+    margin: 4px 0 0;
+    width: 100%;
+  }
 `;
 
 export default Wrapper;
+
+export {
+  Suggestions,
+  Suggestion,
+};
