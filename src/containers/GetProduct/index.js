@@ -314,7 +314,7 @@ class GetProduct extends Component {
           >
             {productDescription}
           </Linkify>
-          <h3>Reviews</h3>
+          <h3 className="a-subtitle">Reviews</h3>
           <Reviews data={reviews.data} />
         </section>
       </Wrapper>
