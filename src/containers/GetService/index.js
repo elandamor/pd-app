@@ -6,6 +6,7 @@ import Linkify from 'linkifyjs/react';
 import hashtag from 'linkifyjs/plugins/hashtag';
 import mention from 'linkifyjs/plugins/mention';
 import numeral from 'numeral';
+import noScroll from 'no-scroll';
 // Components
 import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
@@ -105,11 +106,13 @@ class GetService extends Component {
   }
 
   componentWillMount = () => {
+    noScroll.on();
     modalOverlay.className = '-active';
   }
 
   componentWillUnmount = () => {
     modalOverlay.className = '-inactive';
+    noScroll.off();
   }
 
   onLinkable = ({ evt, pathname }) => {

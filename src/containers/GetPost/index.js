@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import noScroll from 'no-scroll';
 // Components
 import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
@@ -79,11 +80,13 @@ class GetPost extends Component {
   }
 
   componentWillMount = () => {
+    noScroll.on();
     modalOverlay.className = '-active';
   }
 
   componentWillUnmount = () => {
     modalOverlay.className = '-inactive';
+    noScroll.off();
   }
 
   handleChange = (evt) => {
