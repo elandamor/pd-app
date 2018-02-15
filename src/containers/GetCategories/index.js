@@ -85,7 +85,37 @@ const Category = styled.li`
 //   }
 // `;
 
+
+const GET_CATEGORIES = gql`
+  query getCategories($limit: Int) {
+    categories: categoriesQuery(limit: $limit) {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+
 class GetCatagories extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  componentWillReceiveProps = ({ categories, fetchMore, loading }) => {
+    if (!loading && fetchMore) {
+      console.log('Fetching more...');
+      fetchMore({
+        query: GET_CATEGORIES,
+        updateQuery: (previousResult, { fetchMoreResult }) => {
+          const newCategories = fetchMoreResult.categories;
+
+          return {
+            categories: newCategories,
+          };
+        },
+      });
+    }
+  }
+
   onSelect = (category) => {
     this.props.onSelect(category);
   }
@@ -168,28 +198,16 @@ const mapCategoriesToProps = ({ data }) => {
     };
   }
 
-  const { categories: { edges } } = data;
+  const { categories: { edges }, fetchMore } = data;
 
   return {
-    loading: data.loading,
     categories: {
       data: edges,
     },
+    fetchMore,
+    loading: data.loading,
   };
 };
-
-const GET_CATEGORIES = gql`
-  query getCategories($limit: Int) {
-    categories: categoriesQuery(limit: $limit) {
-      edges {
-        node {
-          id
-          name
-        }
-      }
-    }
-  }
-`;
 
 export default compose(
   graphql(GET_CATEGORIES, {
