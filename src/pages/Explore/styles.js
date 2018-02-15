@@ -26,7 +26,10 @@ const Suggestions = styled.ul`
   position: relative;
 
   .vr {
-    visibility: hidden;
+    border-radius: 4px;
+    height: 100px;
+    min-width: 12px;
+    width: 12px;
   }
 `;
 
@@ -43,8 +46,8 @@ const Suggestion = styled.li`
     margin-left: 12px;
   }
 
-  &:last-child {
-    margin-right: 12px;
+  &:last-of-type {
+    margin-right: 0;
   }
 
   .c-user {

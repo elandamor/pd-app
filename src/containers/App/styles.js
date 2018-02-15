@@ -37,8 +37,9 @@ const Main = styled.main`
 
 const Footer = styled.footer`
   background-color: #ffffff;
+  border-top: thin solid #e8e8e8;
   bottom: 0;
-  box-shadow: 0 -1px 5px #e8e8e8;
+  ${'' /* box-shadow: 0 -1px 5px #e8e8e8; */}
   height: 56px;
   left: 0;
   position: fixed;
