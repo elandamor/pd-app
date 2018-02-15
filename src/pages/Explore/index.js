@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 // Components
 import Follow from '../../components/Button/Follow';
 import User from '../../components/User';
+// Containers
+import GetCategories from '../../containers/GetCategories';
 // Styled-Components
 import Wrapper, { Suggestions, Suggestion } from './styles';
 
@@ -43,6 +45,12 @@ const suggestions = [
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Explore extends React.Component {
+  handleCategory = (category) => {
+    const { history, match } = this.props;
+
+    history.push(`${match.url}/${category.id}`);
+  }
+
   render() {
     return (
       <Wrapper>
@@ -68,16 +76,23 @@ class Explore extends React.Component {
                           username={user.username}
                         />
                       </Link>
-                      <Follow />
+                      <Follow
+                        isFollowing={false}
+                      />
                     </Suggestion>
                   )
                 })
               }
-              <li className="vr" />
+              <span className="vr" />
             </Suggestions>
           </div>
         </section>
-        <h2 className="a-heading--sub">Explore</h2>
+        <section
+          className="c-section c-section--categories"
+        >
+          <h2 className="a-heading--sub">Explore</h2>
+          <GetCategories onSelect={this.handleCategory} />
+        </section>
       </Wrapper>
     );
   }
