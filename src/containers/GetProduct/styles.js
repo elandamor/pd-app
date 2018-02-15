@@ -38,12 +38,14 @@ const Wrapper = styled.div`
       display: flex;
       overflow: hidden;
       padding: 0 8px 0 0;
+      width: 100%;
 
       a {
         align-items: center;
         display: flex;
         overflow: hidden;
         padding: 0 8px 0 0;
+        width: 100%;
       }
 
       .c-info {
@@ -60,7 +62,7 @@ const Wrapper = styled.div`
           font-size: 11px;
           color: ${(props) => props.theme.isDark ? '#fff' : '#000'};
           letter-spacing: 0.01rem;
-          line-height: 1.5;
+          line-height: 1.45;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
@@ -252,6 +254,14 @@ const Wrapper = styled.div`
         min-width: 96px;
       }
     }
+  }
+
+  /*
+   * Reviews
+   */
+
+  .a-subtitle {
+    padding-left: 12px;
   }
 `;
 
