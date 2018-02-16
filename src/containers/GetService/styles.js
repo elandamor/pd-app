@@ -103,22 +103,6 @@ const Wrapper = styled.div`
     overflow-y: auto;
     padding-bottom: 104px;
     z-index: 0;
-
-    .c-service-owner {
-      display: none;
-    }
-  }
-
-  .c-service-owner {
-    align-items: center;
-    display: flex;
-    justify-content: stretch;
-
-    .c-user {
-      flex: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
   }
 
   .c-image-wrapper {
@@ -260,7 +244,7 @@ const Wrapper = styled.div`
    * Reviews
    */
 
-  .a-subtitle {
+  .a-heading--sub {
     padding-left: 12px;
   }
 `;

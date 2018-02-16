@@ -13,14 +13,74 @@ const Wrapper = styled.div`
   width: 100%;
   z-index: 6;
 
+  /*
+   * Globals
+   */
+
+  [href] {
+    color: ${(props) => props.theme.isDark ? '#78bcff' : '#003569'};
+    color: ${(props) => props.theme.isDark ? '#78bcff' : '#004f9c'};
+  }
+
   .c-header--main {
+    align-items: center;
     background-color: #ffffff;
     border-bottom: thin solid #e8e8e8;
-    box-shadow: 0 1px 5px #e8e8e8;
+    display: flex;
     height: 64px;
     min-height: 64px;
+    padding-left: 48px;
     width: 100%;
     z-index: 2;
+
+    .c-post-info {
+      align-items: center;
+      display: flex;
+      overflow: hidden;
+      padding: 0 8px 0 0;
+      width: 100%;
+
+      a {
+        align-items: center;
+        display: flex;
+        overflow: hidden;
+        padding: 0 8px 0 0;
+        width: 100%;
+      }
+
+      .c-info {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        margin: 0 auto;
+        overflow: hidden;
+        padding: 6px 0;
+        text-decoration: none;
+
+        span {
+          display: block;
+          font-size: 11px;
+          color: ${(props) => props.theme.isDark ? '#fff' : '#000'};
+          letter-spacing: 0.01rem;
+          line-height: 1.45;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          &.a-post-description {
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 0.01rem;
+            margin-bottom: -2px;
+          }
+
+          &.a-owner {
+            color: ${(props) => props.theme.isDark ? '#D3D4D8' : '#555'};
+            font-weight: 400;
+          }
+        }
+      }
+    }
   }
 
   .c-btn--close {
@@ -45,6 +105,37 @@ const Wrapper = styled.div`
     z-index: 0;
   }
 
+  .c-image-wrapper {
+    background-color: #e8e8e8;
+    padding-bottom: 100%;
+    position: relative;
+
+    img {
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+  }
+
+  .a-description {
+    line-height: 1.5;
+    margin: 12px 12px 12px;
+  }
+
+  .c-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 -12px 0 0;
+  }
+
+  .c-btn--like {
+    .icon,
+    svg {
+      height: 20px;
+      width: 18px;
+    }
+  }
+
   .c-footer--main {
     background-color: #ffffff;
     box-shadow: 0 -1px 5px #e8e8e8;
@@ -53,17 +144,12 @@ const Wrapper = styled.div`
   }
 
   /*
-   * Post
-   */
-
-  .c-post {
-    border: none;
-    box-shadow: none;
-  }
-
-  /*
    * Comments
    */
+
+  .a-heading--sub {
+    padding-left: 12px;
+  }
 
   .c-add-comment {
     align-items: flex-start;

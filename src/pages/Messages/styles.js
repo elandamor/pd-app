@@ -1,31 +1,39 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  ${'' /* display: flex;
-  flex-direction: column;
-  padding: 64px 0 56px;
+  aside {
+    ${'' /* display: flex;
+    flex-direction: column;
+    justify-content: stretch; */}
+    position: relative;
 
-  .c-suggestions {
-    padding: 8px;
-
-    .l-users {
+    header {
+      align-items: center;
       background-color: #ffffff;
-      border: thin solid #ededed;
-      border-radius: 4px;
+      border-bottom: thin solid #e8e8e8;
+      display: flex;
+      height: 48px;
+      position: sticky;
+      top: 0;
+      z-index: 1;
 
-      li {
-        border-bottom: thin solid #ededed;
+      .c-search {
+        flex: 1;
+        padding-left: 8px;
 
-        &:last-child {
-          border: none;
+        &__inner {
+          background-color: #e8e8e8;
+          border-radius: 4px;
+          height: 32px;
         }
       }
     }
-  }
 
-  @media (min-width: 648px) {
-    padding: 88px 0 0;
-  } */}
+    section {
+      flex: 1;
+      z-index: 0;
+    }
+  }
 `;
 
 export default Wrapper;
