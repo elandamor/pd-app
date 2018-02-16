@@ -150,7 +150,7 @@ class Product extends Component {
                     nl2br: true,
                   }}
                 >
-                  {productDescription}
+
                 </Linkify>
               </figcaption>
             </figure>

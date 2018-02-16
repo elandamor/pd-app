@@ -58,7 +58,7 @@ class Service extends Component {
     } = {
       serviceId: Math.round(Math.random() * 1000000),
       serviceDate: '5 days ago',
-      serviceName: 'Express Service',
+      serviceName: 'Express Service by Mercedes-Benz',
       servicePrice: 'RTBA',
       serviceDescription: "It's fast, thorough, and even more convenient. It's Express Service, and it's here for you. Along with an oil change, tire-rotation, and battery check, Express service includes a 37-point inspection that covers the major components of your Mercedes-Benz. All in about an hour or less.",
       serviceImages: [
@@ -161,7 +161,7 @@ class Service extends Component {
                     nl2br: true,
                   }}
                 >
-                  {serviceDescription}
+
                 </Linkify>
               </figcaption>
             </figure>
