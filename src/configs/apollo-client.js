@@ -2,7 +2,7 @@ import { ApolloClient } from 'apollo-client';
 import { ApolloLink, split } from 'apollo-link';
 import { InMemoryCache, } from 'apollo-cache-inmemory';
 import { withClientState } from 'apollo-link-state';
-import { createHttpLink } from 'apollo-link-http';
+import { BatchHttpLink } from "apollo-link-batch-http";
 import { persistCache } from 'apollo-cache-persist';
 import { setContext } from 'apollo-link-context';
 import { WebSocketLink } from 'apollo-link-ws';
@@ -33,7 +33,7 @@ const cache = new InMemoryCache();
 
 const stateLink = withClientState({ cache, resolvers, defaults: defaultState });
 
-const httpLink = createHttpLink({ uri: SERVER_URI });
+const httpLink = new BatchHttpLink({ uri: SERVER_URI });
 
 const retryLink = new RetryLink();
 
