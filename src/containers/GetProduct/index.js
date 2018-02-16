@@ -209,21 +209,6 @@ class GetProduct extends Component {
           </div>
         </header>
         <section className="c-section--main">
-          <div className="c-product-owner">
-            <User
-              avatar={postedBy.avatar}
-              name={postedBy.name}
-              username={postedBy.username}
-            />
-            <Modal
-              trigger={(
-                <ComposeMessage />
-              )}
-              unmountOnExit
-            >
-              <div />
-            </Modal>
-          </div>
           <div className="c-image-wrapper" role="figure">
             {
               hasImages && (
@@ -317,7 +302,7 @@ class GetProduct extends Component {
           >
             {productDescription}
           </Linkify>
-          <h3 className="a-subtitle">Reviews</h3>
+          <h3 className="a-heading--sub">Reviews</h3>
           <Reviews data={reviews.data} />
         </section>
       </Wrapper>

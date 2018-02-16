@@ -148,8 +148,8 @@ class GetService extends Component {
     } = {
       serviceId: Math.round(Math.random() * 1000000),
       serviceDate: '2 days ago',
-      serviceName: 'Express Service',
-      servicePrice: '150',
+      serviceName: 'Express Service by Mercedes-Benz',
+      servicePrice: 'FREE',
       serviceDescription: "It's fast, thorough, and even more convenient. It's Express Service, and it's here for you. Along with an oil change, tire-rotation, and battery check, Express service includes a 37-point inspection that covers the major components of your Mercedes-Benz. All in about an hour or less.",
       serviceImages: [
         {
@@ -211,21 +211,6 @@ class GetService extends Component {
           </div>
         </header>
         <section className="c-section--main">
-          <div className="c-service-owner">
-            <User
-              avatar={postedBy.avatar}
-              name={postedBy.name}
-              username={postedBy.username}
-            />
-            <Modal
-              trigger={(
-                <ComposeMessage />
-              )}
-              unmountOnExit
-            >
-              <div />
-            </Modal>
-          </div>
           <div className="c-image-wrapper" role="figure">
             {
               hasImages && (
@@ -328,7 +313,7 @@ class GetService extends Component {
           >
             {serviceDescription}
           </Linkify>
-          <h3 class="a-subtitle">Reviews</h3>
+          <h3 className="a-heading--sub">Reviews</h3>
           <Reviews data={reviews.data} />
         </section>
       </Wrapper>

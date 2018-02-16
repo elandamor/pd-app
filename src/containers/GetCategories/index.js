@@ -126,45 +126,18 @@ class GetCatagories extends React.PureComponent { // eslint-disable-line react/p
 
     let categories = null;
 
-    // if (mode === 'checklist') {
-    //   categories = data && data.length > 0 && data.map((category) => {
-    //     const node = category.node;
-    //     // console.log({category})
+    categories = data && data.length > 0 && data.map((category) => {
+      const node = category.node;
 
-    //     const inInterests = interests && interests.find((interest) =>
-    //       node.id === interest
-    //     );
-    //     // console.log({inInterests})
-
-    //     return (
-    //       <Category key={node.id}>
-    //         <Checkbox className="c-checkbox">
-    //           <input
-    //             id={`cat-${node.id}`}
-    //             type="checkbox"
-    //             defaultChecked={inInterests}
-    //             onChange={() => this.onSelect(node)}
-    //           />
-    //           <span className="checkInput"></span>
-    //           <label htmlFor={`cat-${node.id}`}>{node.name}</label>
-    //         </Checkbox>
-    //       </Category>
-    //     );
-    //   });
-    // } else {
-      categories = data && data.length > 0 && data.map((category) => {
-        const node = category.node;
-
-        return (
-          <Category
-            key={node.id}
-            onClick={() => this.onSelect(node)}
-          >
-            { node.name }
-          </Category>
-        );
-      });
-    // }
+      return (
+        <Category
+          key={node.id}
+          onClick={() => this.onSelect(node)}
+        >
+          { node.name }
+        </Category>
+      );
+    });
 
     return (
       <Wrapper
@@ -189,6 +162,7 @@ const mapCategoriesToProps = ({ data }) => {
   if (data.errors) {
     return {
       errors: data.errors,
+      loading: data.loading,
     };
   }
 
@@ -215,6 +189,7 @@ export default compose(
       variables: {
         limit: 10,
       },
+      fetchPolicy: 'cache-only',
     },
     props: mapCategoriesToProps,
   })

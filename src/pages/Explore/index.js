@@ -91,7 +91,7 @@ class Explore extends React.Component {
           className="c-section c-section--categories"
         >
           <h2 className="a-heading--sub">Explore</h2>
-          <GetCategories onSelect={this.handleCategory} />
+          <GetCategories first={10} onSelect={this.handleCategory} />
         </section>
       </Wrapper>
     );
