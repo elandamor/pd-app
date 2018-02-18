@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import Follow from '../../components/Button/Follow';
 import User from '../../components/User';
 // Containers
-import GetCategories from '../../containers/GetCategories';
+import Categories from '../../containers/GetCategories/Loadable';
 // Styled-Components
 import Wrapper, { Suggestions, Suggestion } from './styles';
 
@@ -91,7 +91,7 @@ class Explore extends React.Component {
           className="c-section c-section--categories"
         >
           <h2 className="a-heading--sub">Explore</h2>
-          <GetCategories first={10} onSelect={this.handleCategory} />
+          <Categories first={10} onSelect={this.handleCategory} />
         </section>
       </Wrapper>
     );

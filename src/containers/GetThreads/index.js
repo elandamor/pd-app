@@ -5,13 +5,14 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { compose, graphql } from 'react-apollo';
+// import { Link } from 'react-router-dom';
+import { compose } from 'react-apollo';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// Styles
-import styles, { avatar } from './styles';
+// Components
 import User from '../../components/User';
+// Styles
+import styles from './styles';
 
 const Wrapper = styled.ul`
   ${styles}
@@ -277,22 +278,22 @@ GetThreads.propTypes = {
   threads: PropTypes.object,
 };
 
-const mapThreadsToProps = ({ data }) => {
-  if (!data.threads) {
-    return {
-      loading: data.loading,
-    };
-  }
+// const mapThreadsToProps = ({ data }) => {
+//   if (!data.threads) {
+//     return {
+//       loading: data.loading,
+//     };
+//   }
 
-  const { threads: { edges } } = data;
+//   const { threads: { edges } } = data;
 
-  return {
-    loading: data.loading,
-    threads: {
-      data: edges,
-    },
-  };
-};
+//   return {
+//     loading: data.loading,
+//     threads: {
+//       data: edges,
+//     },
+//   };
+// };
 
 export default compose(
   // graphql(getThreadsGQL, {

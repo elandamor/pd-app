@@ -7,6 +7,7 @@ import hashtag from 'linkifyjs/plugins/hashtag';
 import mention from 'linkifyjs/plugins/mention';
 import numeral from 'numeral';
 import noScroll from 'no-scroll';
+import { unique } from 'shorthash';
 // Components
 import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
@@ -19,7 +20,7 @@ import Image from '../../components/Image';
 import Like from '../../components/Button/Like';
 import Modal from '../../components/Modal';
 import Reviews from '../../components/Reviews';
-import User from '../../components/User';
+// import User from '../../components/User';
 // Styled-Components
 import Wrapper, { Customiser } from './styles';
 
@@ -145,7 +146,7 @@ class GetProduct extends Component {
       productImages,
       postedBy
     } = {
-      productId: Math.round(Math.random() * 1000000),
+      productId: unique(Math.round(Math.random() * 1000000)),
       productDate: '2 days ago',
       productName: 'Rolls-Royce Wraith Black Badge',
       productPrice: parseInt('400000', 10),

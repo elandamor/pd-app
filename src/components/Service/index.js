@@ -11,6 +11,7 @@ import Linkify from 'linkifyjs/react';
 import hashtag from 'linkifyjs/plugins/hashtag';
 import mention from 'linkifyjs/plugins/mention';
 import numeral from 'numeral';
+import { unique } from 'shorthash';
 // Components
 import Collect from '../Button/Collect';
 import ComposeMessage from '../Button/ComposeMessage';
@@ -56,7 +57,7 @@ class Service extends Component {
       perCharge,
       postedBy
     } = {
-      serviceId: Math.round(Math.random() * 1000000),
+      serviceId: unique(Math.round(Math.random() * 1000000).toString()),
       serviceDate: '5 days ago',
       serviceName: 'Express Service by Mercedes-Benz',
       servicePrice: 'RTBA',

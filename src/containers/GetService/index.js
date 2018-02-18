@@ -19,7 +19,7 @@ import Image from '../../components/Image';
 import Like from '../../components/Button/Like';
 import Modal from '../../components/Modal';
 import Reviews from '../../components/Reviews';
-import User from '../../components/User';
+// import User from '../../components/User';
 // Styled-Components
 import Wrapper, { Customiser } from './styles';
 

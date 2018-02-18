@@ -7,7 +7,6 @@ import hashtag from 'linkifyjs/plugins/hashtag';
 import mention from 'linkifyjs/plugins/mention';
 // Components
 import Avatar from '../Avatar';
-// import User from '../User';
 // Styled-Components
 import Wrapper, { Comment } from './styles';
 
@@ -21,8 +20,7 @@ const Comments = ({ data }) => {
 
   if (hasComments) {
     comments = data.map((comment) => {
-      const postedBy = comment.postedBy;
-      const postDate = comment.postDate;
+      const { postedBy, postDate } = comment;
 
       return (
         <Comment className="c-comment" key={comment.id}>
@@ -66,8 +64,8 @@ const Comments = ({ data }) => {
                 url: 'c-url',
               },
               formatHref: {
-                hashtag: (val) => `/search?q=${val.substr(1)}&src=hashtag_click`,
-                mention: (val) => `/@${val.substr(1)}?src=mention_click`,
+                hashtag: val => `/search?q=${val.substr(1)}&src=hashtag_click`,
+                mention: val => `/@${val.substr(1)}?src=mention_click`,
               },
               nl2br: true,
             }}
@@ -85,7 +83,7 @@ const Comments = ({ data }) => {
 };
 
 Comments.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Comments;

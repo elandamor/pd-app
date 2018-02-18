@@ -10,6 +10,7 @@ import * as linkify from 'linkifyjs';
 import Linkify from 'linkifyjs/react';
 import hashtag from 'linkifyjs/plugins/hashtag';
 import mention from 'linkifyjs/plugins/mention';
+import { unique } from 'shorthash';
 // Components
 import ComposeMessage from '../Button/ComposeMessage';
 import Like from '../Button/Like';
@@ -49,7 +50,7 @@ class Post extends Component {
       postImages,
       postedBy
     } = {
-      postId: Math.round(Math.random() * 1000000),
+      postId: unique(Math.round(Math.random() * 1000000).toString()),
       postDate: 'about 3 hours ago',
       postDescription: 'The undeniable allure of refined luxury - #RangeRover. Search "Range Rover test drive" to experience first class travel at its finest. #RangeRover #PHEV #HybridElectricVehicle #HybridSUV #Carsofinstagram #Technology #Luxury #LuxurySUV',
       postImages: [{

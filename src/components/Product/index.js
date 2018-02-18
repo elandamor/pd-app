@@ -11,6 +11,7 @@ import Linkify from 'linkifyjs/react';
 import hashtag from 'linkifyjs/plugins/hashtag';
 import mention from 'linkifyjs/plugins/mention';
 import numeral from 'numeral';
+import { unique } from 'shorthash';
 // Components
 import Collect from '../Button/Collect';
 import ComposeMessage from '../Button/ComposeMessage';
@@ -55,7 +56,7 @@ class Product extends Component {
       productImages,
       postedBy
     } = {
-      productId: Math.round(Math.random() * 1000000),
+      productId: unique(Math.round(Math.random() * 1000000).toString()),
       productDate: '2 days ago',
       productName: 'Rolls-Royce Wraith Black Badge',
       productPrice: '400000',

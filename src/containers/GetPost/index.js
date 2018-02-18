@@ -14,7 +14,7 @@ import Comments from '../../components/Comments/Loadable';
 import Icon from '../../components/Icon';
 import { ICONS } from '../../components/Icon/constants';
 import Image from '../../components/Image';
-import Like from '../../components/Button/Like';
+// import Like from '../../components/Button/Like';
 import Modal from '../../components/Modal';
 import Textarea from '../../components/Textarea';
 // Styled-Components
@@ -108,8 +108,8 @@ class GetPost extends Component {
     const { commentText } = this.state;
 
     const {
-      postId,
-      postDate,
+      // postId,
+      // postDate,
       postDescription,
       postImages,
       postedBy

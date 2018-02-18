@@ -6,28 +6,10 @@
 
 import React from 'react';
 import { compose, graphql } from 'react-apollo';
+import { gql } from 'apollo-boost';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import gql from 'graphql-tag';
-// Styles
-import styles from './styles';
-
-const Wrapper = styled.ul`
-  margin: 0;
-  padding: 0 12px 12px;
-
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 120px;
-  grid-gap: 12px;
-`;
-
-const Category = styled.li`
-  background-color: #e8e8e8;
-  border-radius: 4px;
-  list-style-type: none;
-  text-indent: -99999px;
-`;
+// Styled-Components
+import Wrapper, { Category } from './styles';
 
 // const Checkbox = styled.div`
 //   align-items: center;
@@ -189,7 +171,7 @@ export default compose(
       variables: {
         limit: 10,
       },
-      fetchPolicy: 'cache-only',
+      fetchPolicy: 'cache-first',
     },
     props: mapCategoriesToProps,
   })
