@@ -12,12 +12,31 @@ import client from './configs/apollo-client';
 // Import global styles.
 import './global-styles';
 
-ReactDOM.render(
-  <ApolloProvider client={client}>
-    <Router>
-      <App />
-    </Router>
-  </ApolloProvider>
-, document.getElementById('app'));
+// eslint-disable-next-line no-undef
+const MOUNT_NODE = document.getElementById('app');
+
+const render = () => {
+  ReactDOM.render(
+    <ApolloProvider client={client}>
+      <Router>
+        <App />
+      </Router>
+    </ApolloProvider>
+    ,
+    MOUNT_NODE,
+  );
+};
+
+if (module.hot) {
+  // Hot reloadable React components and translation json files
+  // modules.hot.accept does not accept dynamic dependencies,
+  // have to be constants at compile-time
+  module.hot.accept(['./containers/App'], () => {
+    ReactDOM.unmountComponentAtNode(MOUNT_NODE);
+    render();
+  });
+}
+
+render();
 
 registerServiceWorker();
