@@ -308,12 +308,6 @@ const Customiser = styled.div`
           height: 20px;
           width: 20px;
         }
-
-        ${'' /* span {
-          display: inline-block;
-          font-size: 16px;
-          letter-spacing: 0.01rem;
-        } */}
       }
     }
   }
