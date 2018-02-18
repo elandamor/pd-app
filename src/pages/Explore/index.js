@@ -5,7 +5,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 // Components
 import Follow from '../../components/Button/Follow';
 import User from '../../components/User';
@@ -40,7 +40,7 @@ const suggestions = [
     avatar: '',
     name: 'Jaguar',
     username: 'jaguar',
-  }
+  },
 ];
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -64,42 +64,41 @@ class Explore extends React.Component {
           <div className="c-inner">
             <Suggestions>
               {
-                suggestions.map((user) => {
-                  return (
-                    <Suggestion key={user.id}>
-                      <Link
-                        to={`/@${user.username}`}
-                      >
-                        <User
-                          avatar={user.avatar}
-                          name={user.name}
-                          username={user.username}
-                        />
-                      </Link>
-                      <Follow
-                        isFollowing={false}
+                suggestions.map((user) => (
+                  <Suggestion key={user.id}>
+                    <Link
+                      to={`/@${user.username}`}
+                    >
+                      <User
+                        avatar={user.avatar}
+                        name={user.name}
+                        username={user.username}
                       />
-                    </Suggestion>
-                  )
-                })
+                    </Link>
+                    <Follow
+                      isFollowing={false}
+                    />
+                  </Suggestion>
+                ))
               }
-              <span className="vr" />
+              <li className="vr" />
             </Suggestions>
           </div>
         </section>
-        <section
+        <main
           className="c-section c-section--categories"
         >
           <h2 className="a-heading--sub">Explore</h2>
           <Categories first={10} onSelect={this.handleCategory} />
-        </section>
+        </main>
       </Wrapper>
     );
   }
 }
 
 Explore.propTypes = {
-
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 export default Explore;
