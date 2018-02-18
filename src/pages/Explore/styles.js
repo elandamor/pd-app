@@ -28,6 +28,8 @@ const Suggestions = styled.ul`
   .vr {
     border-radius: 4px;
     height: 100px;
+    list-style-type: none;
+    margin-left: -12px;
     min-width: 12px;
     width: 12px;
   }
