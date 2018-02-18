@@ -51,11 +51,11 @@ class Home extends React.Component {
             <FeedFilter onFilter={this.handleFilter} />
           </Modal>
         </Filter>
-        <div className="c-feed">
+        <main className="c-feed">
           <Post {...this.props} />
           <Product {...this.props} />
           <Service {...this.props} />
-        </div>
+        </main>
         <Switch>
           <Route
             exact

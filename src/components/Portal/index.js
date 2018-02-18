@@ -21,8 +21,8 @@ class Portal extends Component {
     this.el.className = `c-modal${props.className || ''}`;
 
     this.el.setAttribute('role', 'dialog');
-    this.el.setAttribute('aria-labelledby', 'dialog-title');
-    this.el.setAttribute('aria-describedby', 'dialog-description');
+    // this.el.setAttribute('aria-labelledby', 'dialog-title');
+    // this.el.setAttribute('aria-describedby', 'dialog-description');
   }
 
   componentDidMount = () => {
