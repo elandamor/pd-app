@@ -83,12 +83,10 @@ const reviews = {
   ],
 };
 
-const quantities = [...Array(10).keys()].map((key, idx) => {
-  return {
-    name: idx + 1,
-    value: idx + 1,
-  }
-});
+const quantities = [...Array(10).keys()].map((key, idx) => ({
+  name: idx + 1,
+  value: idx + 1,
+}));
 
 class GetService extends Component {
   constructor(props) {
@@ -97,12 +95,6 @@ class GetService extends Component {
     this.state = {
       quantity: 1,
     };
-  }
-
-  handleQuantity = (quantity) => {
-    this.setState({
-      quantity: quantity.value,
-    });
   }
 
   componentWillMount = () => {
@@ -117,7 +109,7 @@ class GetService extends Component {
 
   onLinkable = ({ evt, pathname }) => {
     const { history } = this.props;
-    const target = evt.target;
+    const { target } = evt;
 
     let route = pathname;
 
@@ -132,6 +124,12 @@ class GetService extends Component {
     history.push(route);
   }
 
+  handleQuantity = (quantity) => {
+    this.setState({
+      quantity: quantity.value,
+    });
+  }
+
   render() {
     const { className, history } = this.props;
     const { quantity } = this.state;
@@ -144,7 +142,7 @@ class GetService extends Component {
       serviceDescription,
       serviceImages,
       perCharge,
-      postedBy
+      postedBy,
     } = {
       serviceId: Math.round(Math.random() * 1000000),
       serviceDate: '2 days ago',
@@ -158,7 +156,7 @@ class GetService extends Component {
         }, {
           id: Math.round(Math.random() * 1000000),
           url: 'https://www.standard.co.uk/s3fs-public/thumbnails/image/2017/06/01/15/rolls-royce-8.png',
-        }
+        },
       ],
       perCharge: 'hr',
       postedBy: {
@@ -166,18 +164,19 @@ class GetService extends Component {
         avatar: '',
         name: 'Mercedes-Benz',
         username: 'mercedesbenz',
-      }
+      },
     };
 
     const hasImages = serviceImages && serviceImages.length > 0;
 
     return (
       <Wrapper
-        className={`c-service-viewer${className ? className : ''}`}
+        className={`c-service-viewer${className || ''}`}
       >
         <header className="c-header--main">
           <Button
             className="c-btn--close"
+            aria-label="Go back to feed"
             onClick={() => history.goBack()}
           >
             <Icon icon={ICONS.BACK} />
@@ -211,7 +210,7 @@ class GetService extends Component {
           </div>
         </header>
         <section className="c-section--main">
-          <div className="c-image-wrapper" role="figure">
+          <div className="c-image-wrapper">
             {
               hasImages && (
                 <Image
@@ -225,7 +224,7 @@ class GetService extends Component {
           </div>
           <div className="c-service-info">
             <h2 className="a-name">{serviceName}</h2>
-            <div className="c-metadata"></div>
+            <div className="c-metadata" />
             <div className="c-actions">
               <Like
                 aria-label="Like"
@@ -237,7 +236,7 @@ class GetService extends Component {
                 trigger={(
                   <Collect
                     aria-label="Collect"
-                    aria-checked={true}
+                    aria-checked
                     data-themed={false}
                   />
                 )}
@@ -321,8 +320,13 @@ class GetService extends Component {
   }
 }
 
+GetService.defaultProps = {
+  className: '',
+};
+
 GetService.propTypes = {
   className: PropTypes.string,
+  history: PropTypes.object.isRequired,
 };
 
 export default GetService;

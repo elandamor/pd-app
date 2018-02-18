@@ -84,12 +84,10 @@ const reviews = {
   ],
 };
 
-const quantities = [...Array(10).keys()].map((key, idx) => {
-  return {
-    name: idx + 1,
-    value: idx + 1,
-  }
-});
+const quantities = [...Array(10).keys()].map((key, idx) => ({
+  name: idx + 1,
+  value: idx + 1,
+}));
 
 class GetProduct extends Component {
   constructor(props) {
@@ -98,12 +96,6 @@ class GetProduct extends Component {
     this.state = {
       quantity: 1,
     };
-  }
-
-  handleQuantity = (quantity) => {
-    this.setState({
-      quantity: quantity.value,
-    });
   }
 
   componentWillMount = () => {
@@ -118,7 +110,7 @@ class GetProduct extends Component {
 
   onLinkable = ({ evt, pathname }) => {
     const { history } = this.props;
-    const target = evt.target;
+    const { target } = evt;
 
     let route = pathname;
 
@@ -133,6 +125,12 @@ class GetProduct extends Component {
     history.push(route);
   }
 
+  handleQuantity = (quantity) => {
+    this.setState({
+      quantity: quantity.value,
+    });
+  }
+
   render() {
     const { className, history } = this.props;
     const { quantity } = this.state;
@@ -144,7 +142,7 @@ class GetProduct extends Component {
       productPrice,
       productDescription,
       productImages,
-      postedBy
+      postedBy,
     } = {
       productId: unique(Math.round(Math.random() * 1000000)),
       productDate: '2 days ago',
@@ -158,25 +156,26 @@ class GetProduct extends Component {
         }, {
           id: Math.round(Math.random() * 1000000),
           url: 'https://www.standard.co.uk/s3fs-public/thumbnails/image/2017/06/01/15/rolls-royce-8.png',
-        }
+        },
       ],
       postedBy: {
         id: 1,
         avatar: '',
         name: 'Rolls-Royce Motor Cars',
         username: 'rollsroycemotorcars',
-      }
+      },
     };
 
     const hasImages = productImages && productImages.length > 0;
 
     return (
       <Wrapper
-        className={`c-product-viewer${className ? className : ''}`}
+        className={`c-product-viewer${className || ''}`}
       >
         <header className="c-header--main">
           <Button
             className="c-btn--close"
+            aria-label="Go back to feed"
             onClick={() => history.goBack()}
           >
             <Icon icon={ICONS.BACK} />
@@ -210,7 +209,7 @@ class GetProduct extends Component {
           </div>
         </header>
         <section className="c-section--main">
-          <div className="c-image-wrapper" role="figure">
+          <div className="c-image-wrapper">
             {
               hasImages && (
                 <Image
@@ -224,7 +223,7 @@ class GetProduct extends Component {
           </div>
           <div className="c-product-info">
             <h2 className="a-name">{productName}</h2>
-            <div className="c-metadata"></div>
+            <div className="c-metadata" />
             <div className="c-actions">
               <Like
                 aria-label="Like"
@@ -236,7 +235,7 @@ class GetProduct extends Component {
                 trigger={(
                   <Collect
                     aria-label="Collect"
-                    aria-checked={true}
+                    aria-checked
                     data-themed={false}
                   />
                 )}
@@ -311,8 +310,13 @@ class GetProduct extends Component {
   }
 }
 
+GetProduct.defaultProps = {
+  className: '',
+};
+
 GetProduct.propTypes = {
   className: PropTypes.string,
+  history: PropTypes.object.isRequired,
 };
 
 export default GetProduct;

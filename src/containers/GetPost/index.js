@@ -112,7 +112,7 @@ class GetPost extends Component {
       // postDate,
       postDescription,
       postImages,
-      postedBy
+      postedBy,
     } = {
       postId: Math.round(Math.random() * 1000000),
       postDate: 'about 3 hours ago',
@@ -126,18 +126,19 @@ class GetPost extends Component {
         avatar: '',
         name: 'Land Rover',
         username: 'landrover',
-      }
+      },
     };
 
     const hasImages = postImages && postImages.length > 0;
 
     return (
       <Wrapper
-        className={`c-post-viewer${className ? className : ''}`}
+        className={`c-post-viewer${className || ''}`}
       >
         <header className="c-header--main">
           <Button
             className="c-btn--close"
+            aria-label="Go back to feed"
             onClick={() => history.goBack()}
           >
             <Icon icon={ICONS.BACK} />
@@ -171,7 +172,7 @@ class GetPost extends Component {
           </div>
         </header>
         <section className="c-section--main">
-          <div className="c-image-wrapper" role="figure">
+          <div className="c-image-wrapper">
             {
               hasImages && (
                 <Image
@@ -218,6 +219,7 @@ class GetPost extends Component {
                 rows={1}
                 maxRows={6}
                 value={commentText}
+                srlabel="Type your comment here"
               />
               {
                 commentText.length > 0 && (
@@ -243,8 +245,13 @@ class GetPost extends Component {
   }
 }
 
+GetPost.defaultProps = {
+  className: '',
+};
+
 GetPost.propTypes = {
   className: PropTypes.string,
+  history: PropTypes.object.isRequired,
 };
 
 export default GetPost;
