@@ -31,11 +31,6 @@ const SET_AUTHENTICATED_USER = gql`
 `;
 
 class App extends Component {
-  componentDidMount = async () => {
-    // await this.setAuthenticatedUser();
-    // this.getAuthenticatedUser();
-  }
-
   setAuthenticatedUser = async () => {
     const { client } = this.props;
 
@@ -47,17 +42,17 @@ class App extends Component {
           id: 3,
           name: 'Rolls-Royce Motor Cars',
           username: 'rollsroycecars',
-        }
-      }
+        },
+      },
     });
   }
 
   getAuthenticatedUser = async () => {
     const { client } = this.props;
-    const authenticatedUser = await client.query({
+
+    await client.query({
       query: GET_AUTHENTICATED_USER,
-    }).then(({data: { authenticatedUser }}) => authenticatedUser);
-    console.log({ authenticatedUser })
+    });
   }
 
   render() {

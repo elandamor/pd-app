@@ -4,8 +4,7 @@
  */
 
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import * as linkify from 'linkifyjs';
 import Linkify from 'linkifyjs/react';
 import hashtag from 'linkifyjs/plugins/hashtag';
@@ -31,7 +30,7 @@ mention(linkify);
 class Product extends Component {
   onLinkable = ({ evt, pathname }) => {
     const { history } = this.props;
-    const target = evt.target;
+    const { target } = evt;
 
     let route = pathname;
 
@@ -54,7 +53,7 @@ class Product extends Component {
       productPrice,
       productDescription,
       productImages,
-      postedBy
+      postedBy,
     } = {
       productId: unique(Math.round(Math.random() * 1000000).toString()),
       productDate: '2 days ago',
@@ -68,14 +67,14 @@ class Product extends Component {
         }, {
           id: Math.round(Math.random() * 1000000),
           url: 'https://www.standard.co.uk/s3fs-public/thumbnails/image/2017/06/01/15/rolls-royce-8.png',
-        }
+        },
       ],
       postedBy: {
         id: 1,
         avatar: '',
         name: 'Rolls-Royce Motor Cars',
         username: 'rollsroycemotorcars',
-      }
+      },
     };
 
     const inFeed = true;
@@ -108,6 +107,7 @@ class Product extends Component {
                 ? `/f/product/${productId}`
                 : `/@${postedBy.username}/products/${productId}`,
             })}
+            role="presentation"
           >
             <figure>
               {
@@ -150,9 +150,7 @@ class Product extends Component {
                     },
                     nl2br: true,
                   }}
-                >
-
-                </Linkify>
+                />
               </figcaption>
             </figure>
           </div>
@@ -175,7 +173,7 @@ class Product extends Component {
               trigger={(
                 <Collect
                   aria-label="Collect"
-                  aria-checked={true}
+                  aria-checked
                   data-themed={false}
                 />
               )}
@@ -191,7 +189,7 @@ class Product extends Component {
 }
 
 Product.propTypes = {
-
+  history: PropTypes.object.isRequired,
 };
 
 export default Product;

@@ -4,8 +4,7 @@
  */
 
 import React, { Component, Fragment } from 'react';
-// import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import * as linkify from 'linkifyjs';
 import Linkify from 'linkifyjs/react';
 import hashtag from 'linkifyjs/plugins/hashtag';
@@ -31,7 +30,7 @@ mention(linkify);
 class Service extends Component {
   onLinkable = ({ evt, pathname }) => {
     const { history } = this.props;
-    const target = evt.target;
+    const { target } = evt;
 
     let route = pathname;
 
@@ -40,7 +39,7 @@ class Service extends Component {
     const isLinkified = isHashtag || isMention;
 
     if (isLinkified) {
-      route = `${evt.target.pathname}${evt.target.search}`;
+      route = `${target.pathname}${target.search}`;
     }
 
     history.push(route);
@@ -55,7 +54,7 @@ class Service extends Component {
       serviceDescription,
       serviceImages,
       perCharge,
-      postedBy
+      postedBy,
     } = {
       serviceId: unique(Math.round(Math.random() * 1000000).toString()),
       serviceDate: '5 days ago',
@@ -69,7 +68,7 @@ class Service extends Component {
         }, {
           id: Math.round(Math.random() * 1000000),
           url: 'https://www.standard.co.uk/s3fs-public/thumbnails/image/2017/06/01/15/rolls-royce-8.png',
-        }
+        },
       ],
       perCharge: 'hr',
       postedBy: {
@@ -77,7 +76,7 @@ class Service extends Component {
         avatar: '',
         name: 'Mercedes-Benz',
         username: 'mercedesbenz',
-      }
+      },
     };
 
     const inFeed = true;
@@ -110,6 +109,7 @@ class Service extends Component {
                 ? `/f/service/${serviceId}`
                 : `/@${postedBy.username}/services/${serviceId}`,
             })}
+            role="presentation"
           >
             <figure>
               {
@@ -161,9 +161,7 @@ class Service extends Component {
                     },
                     nl2br: true,
                   }}
-                >
-
-                </Linkify>
+                 />
               </figcaption>
             </figure>
           </div>
@@ -186,7 +184,7 @@ class Service extends Component {
               trigger={(
                 <Collect
                   aria-label="Collect"
-                  aria-checked={true}
+                  aria-checked
                   data-themed={false}
                 />
               )}
@@ -202,7 +200,7 @@ class Service extends Component {
 }
 
 Service.propTypes = {
-
+  history: PropTypes.object.isRequired,
 };
 
 export default Service;
