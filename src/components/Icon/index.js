@@ -25,13 +25,17 @@ const Icon = (props) => {
         height={`${props.size}`}
         viewBox={`${props.viewBox}`}
       >
-        <path style={styles.path} d={props.icon}></path>
+        <path
+          style={styles.path}
+          d={props.icon}
+        />
       </svg>
     </Wrapper>
   );
 };
 
 Icon.propTypes = {
+  className: PropTypes.string,
   icon: PropTypes.string.isRequired,
   size: PropTypes.number,
   fill: PropTypes.string,
@@ -41,6 +45,7 @@ Icon.propTypes = {
 };
 
 Icon.defaultProps = {
+  className: '',
   size: 24,
   viewBox: '0 0 24 24',
 };
