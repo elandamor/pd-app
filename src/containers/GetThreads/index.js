@@ -33,7 +33,7 @@ const data = [
         from: {
           id: authenticatedUser.id,
         },
-        unread: true,
+        unread: false,
         createdAt: '16:48',
       },
       participants: [
@@ -72,7 +72,7 @@ const data = [
       ],
       subject: '',
       unReadMessages: {
-        count: 10,
+        count: 20,
       },
     },
   },

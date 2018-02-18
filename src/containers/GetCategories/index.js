@@ -74,11 +74,12 @@ class GetCatagories extends React.Component {
 }
 
 GetCatagories.defaultProps = {
+  categories: { data: [] },
   onSelect: () => ({}),
 };
 
 GetCatagories.propTypes = {
-  categories: PropTypes.object.isRequired,
+  categories: PropTypes.object,
   onSelect: PropTypes.func,
 };
 
