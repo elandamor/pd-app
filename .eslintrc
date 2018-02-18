@@ -22,6 +22,7 @@
     ],
     "rules": {
       "arrow-parens": [2, "always"],
+      "function-paren-newline": [2, "consistent"],
       "import/no-dynamic-require": 0,
       "import/no-named-as-default": 0,
       "jsx-a11y/anchor-is-valid": 0,
