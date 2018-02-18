@@ -8,130 +8,12 @@ import React from 'react';
 // import { Link } from 'react-router-dom';
 import { compose } from 'react-apollo';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 // Components
+import Icon from '../../components/Icon';
+import { ICONS } from '../../components/Icon/constants';
 import User from '../../components/User';
 // Styles
-import styles from './styles';
-
-const Wrapper = styled.ul`
-  ${styles}
-`;
-
-const Thread = styled.li`
-  align-items: flex-start;
-  border-bottom: thin solid #e8e8e8;
-  display: flex;
-  flex-direction: column;
-  list-style-type: none;
-  min-height: 48px;
-  position: relative;
-
-  .c-recipient {
-    align-items: flex-start;
-    display: flex;
-    width: 100%;
-
-    .c-user {
-      flex: 1;
-      overflow: hidden;
-    }
-
-    .c-stats {
-      margin-top: 6px;
-      padding: 4px 10px 8px;
-      position: relative;
-
-      span {
-        display: block;
-      }
-
-      .c-date {
-        color: ${(props) => props.theme.isDark ? '#ffffff' : '#000000'};
-        font-size: 13px;
-        font-weight: 500;
-      }
-
-      .c-status {
-        bottom: 4px;
-        color: ${(props) => props.theme.isDark ? '#ffffff' : '#000000'};
-        font-size: 12px;
-        position: absolute;
-        right: 8px;
-      }
-    }
-  }
-
-  .message {
-    align-items: flex-end;
-    color: ${(props) => props.theme.isDark ? '#fff' : '#242424'};
-    display: flex;
-    font-size: 12px;
-    margin: -4px 0 8px;
-    overflow: hidden;
-    padding-left: 48px;
-    width: 100%;
-
-    p {
-      margin: 0 4px 0 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      width: 100%;
-    }
-
-    &.-incoming {
-      .c-status {
-        background-color: #004f9c;
-        display: none;
-      }
-
-      &.-unread {
-        margin-top: -10px;
-        padding-right: 12px;
-
-        .c-status {
-          border-radius: 24px;
-          color: #ffffff;
-          display: inline-table;
-          font-size: 12px;
-          height: 20px;
-          line-height: 20px;
-          min-width: 20px;
-          padding: 0 8px;
-          text-align: center;
-        }
-      }
-    }
-
-    &.-outgoing {
-      .c-status {
-        background-color: green;
-      }
-
-      &.-read {
-        .c-status {
-          &:before {
-            background-color: green;
-            content: '';
-            display: block;
-            height: 10px;
-            width: 10px;
-            position: absolute;
-            right: 22px;
-          }
-        }
-
-      }
-    }
-  }
-
-  .c-status {
-    height: 10px;
-    margin-right: 8px;
-    width: 10px;
-  }
-`;
+import Wrapper, { Thread } from './styles';
 
 // Mock authenticatedUser data.
 const authenticatedUser = {
@@ -151,8 +33,8 @@ const data = [
         from: {
           id: authenticatedUser.id,
         },
-        unread: false,
-        createdAt: '16:48'
+        unread: true,
+        createdAt: '16:48',
       },
       participants: [
         {
@@ -160,23 +42,24 @@ const data = [
           name: 'Mercedes-Benz',
           username: 'mercedesbenz',
         },
-        authenticatedUser
+        authenticatedUser,
       ],
       subject: '',
       unReadMessages: {
         count: 0,
       },
     },
-  }, {
+  },
+  {
     node: {
       id: Math.round(Math.random() * 1000000),
       lastMessage: {
         body: 'This is a test message from Rolls-Royce Motor Cars',
-        from : {
+        from: {
           id: Math.round(Math.random() * 1000000),
         },
         unread: true,
-        createdAt: 'Yesterday'
+        createdAt: 'Yesterday',
       },
       participants: [
         {
@@ -185,7 +68,7 @@ const data = [
           name: 'Rolls-Royce Motor Cars',
           username: 'rollsroycecars',
         },
-        authenticatedUser
+        authenticatedUser,
       ],
       subject: '',
       unReadMessages: {
@@ -209,15 +92,15 @@ class GetThreads extends React.Component { // eslint-disable-line react/prefer-s
 
     if (authenticatedUser) {
       threads = data && data.length > 0 && data.map((thread) => {
-        const node = thread.node;
+        const { node } = thread;
 
         const { lastMessage, participants, unReadMessages } = node;
 
         if (participants.length < 1) return null;
 
         const recipient = participants && participants.length > 0
-          && participants.find((participant) =>
-            participant.id !== authenticatedUser.id
+          && participants.find(
+            (participant) => participant.id !== authenticatedUser.id,
           );
 
         return (
@@ -247,15 +130,34 @@ class GetThreads extends React.Component { // eslint-disable-line react/prefer-s
               `}
             >
               <p>{lastMessage.body}</p>
-              <span
-                className="c-status"
-              >
-                {
-                  unReadMessages.count > 0 && (
-                    unReadMessages.count
-                  )
-                }
-              </span>
+              {
+                lastMessage.from.id !== authenticatedUser.id
+                && unReadMessages.count > 0 && (
+                  <span
+                    className="c-status"
+                  >
+                    { unReadMessages.count }
+                  </span>
+                )
+              }
+              {
+                lastMessage.from.id === authenticatedUser.id && (
+                  <span
+                    className="c-status"
+                  >
+                    <span className="c-tick-wrapper">
+                      <Icon
+                        className="a-tick a-tick--single"
+                        icon={ICONS.TICK}
+                      />
+                      <Icon
+                        className="a-tick a-tick--double"
+                        icon={ICONS.TICK}
+                      />
+                    </span>
+                  </span>
+                )
+              }
             </div>
           </Thread>
         );
@@ -271,11 +173,12 @@ class GetThreads extends React.Component { // eslint-disable-line react/prefer-s
 }
 
 GetThreads.defaultProps = {
-
+  loading: true,
 };
 
 GetThreads.propTypes = {
-  threads: PropTypes.object,
+  loading: PropTypes.bool,
+  // threads: PropTypes.object,
 };
 
 // const mapThreadsToProps = ({ data }) => {
