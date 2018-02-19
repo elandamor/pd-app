@@ -75,6 +75,17 @@ const Wrapper = styled.div`
       padding-left: 12px;
     }
   }
+
+  .c-frequent-contacts {
+    .c-contact {
+      border-bottom: thin solid #e8e8e8;
+      display: block;
+
+      &:last-child {
+        border: none;
+      }
+    }
+  }
 `;
 
 export default Wrapper;
