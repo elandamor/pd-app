@@ -131,13 +131,14 @@ class GetThreads extends React.Component { // eslint-disable-line react/prefer-s
           );
 
         return (
-          <Link
+          <Thread
             key={node.id}
-            to={{
-              pathname: `${match.url}/${node.id}`,
-            }}
           >
-            <Thread>
+            <Link
+              to={{
+                pathname: `${match.url}/${node.id}`,
+              }}
+            >
               <div className="c-recipient">
                 <User
                   avatar={recipient.avatar}
@@ -189,9 +190,8 @@ class GetThreads extends React.Component { // eslint-disable-line react/prefer-s
                   )
                 }
               </div>
-            </Thread>
-          </Link>
-
+            </Link>
+          </Thread>
         );
       });
     }

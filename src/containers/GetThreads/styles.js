@@ -6,13 +6,15 @@ const Wrapper = styled.ul`
 `;
 
 const Thread = styled.li`
-  align-items: flex-start;
-  border-bottom: thin solid #e8e8e8;
-  display: flex;
-  flex-direction: column;
-  list-style-type: none;
-  min-height: 48px;
-  position: relative;
+  a {
+    align-items: flex-start;
+    border-bottom: thin solid #e8e8e8;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    min-height: 48px;
+    position: relative;
+  }
 
   .c-recipient {
     align-items: flex-start;
