@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 // import { Link } from 'react-router-dom';
 import { compose } from 'react-apollo';
 import PropTypes from 'prop-types';
@@ -31,6 +31,13 @@ const data = [
       avatar: '',
       name: 'Jaguar',
       username: 'jaguar',
+    },
+  }, { // Intentionally placed object "out-of-order" to test sorting function.
+    node: {
+      id: Math.round(Math.random() * 1000000),
+      avatar: '',
+      name: 'Aston Martin',
+      username: 'arstonmartin',
     },
   }, {
     node: {
@@ -61,7 +68,20 @@ const data = [
       username: 'rollsroycecars',
     },
   },
-];
+].sort((a, b) => {
+  const A = a.node.name.toLowerCase();
+  const B = b.node.name.toLowerCase();
+
+  if (A < B) {
+    return -1;
+  }
+
+  if (A > B) {
+    return 1;
+  }
+
+  return 0;
+});
 
 class GetContacts extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillReceiveProps({ loading }) {
@@ -76,22 +96,37 @@ class GetContacts extends React.Component { // eslint-disable-line react/prefer-
     let contacts = null;
 
     if (authenticatedUser) {
-      contacts = data && data.length > 0 && data.map((contact) => {
+      contacts = data && data.length > 0 && data.map((contact, idx) => {
         const { node } = contact;
 
+        const currentNavigator = node.name.charAt(0).toUpperCase();
+        let prevNavigator;
+
+        if (idx > 0) {
+          prevNavigator = data[idx - 1].node.name.charAt(0).toUpperCase();
+        }
+
         return (
-          <Contact
+          <Fragment
             key={node.id}
-            onClick={() => this.props.onSelect(node)}
           >
-            <div className="c-contact">
-              <User
-                avatar={node.avatar}
-                name={node.name}
-                username={node.username}
-              />
-            </div>
-          </Contact>
+            {
+              currentNavigator !== prevNavigator && (
+                <h2 className="a-heading--sub">{currentNavigator}</h2>
+              )
+            }
+            <Contact
+              onClick={() => this.props.onSelect(node)}
+            >
+              <div className="c-contact">
+                <User
+                  avatar={node.avatar}
+                  name={node.name}
+                  username={node.username}
+                />
+              </div>
+            </Contact>
+          </Fragment>
         );
       });
     }
