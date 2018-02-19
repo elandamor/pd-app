@@ -28,6 +28,7 @@
       "jsx-a11y/anchor-is-valid": 0,
       "no-confusing-arrow": 0,
       "no-console": 1,
+      "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
       "object-curly-newline": [2, { "consistent": true }],
       "react/jsx-filename-extension": 0,
       "react/forbid-prop-types": 0
