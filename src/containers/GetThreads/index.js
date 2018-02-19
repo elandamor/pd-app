@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { compose } from 'react-apollo';
 import PropTypes from 'prop-types';
 // Components
@@ -39,6 +39,7 @@ const data = [
       participants: [
         {
           id: Math.round(Math.random() * 1000000),
+          avatar: '',
           name: 'Mercedes-Benz',
           username: 'mercedesbenz',
         },
@@ -79,6 +80,31 @@ const data = [
 ];
 
 class GetThreads extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  componentDidMount = () => {
+    const { onLoad } = this.props;
+
+    let contacts = [];
+
+    contacts = data && data.length > 0 && data.map((thread) => {
+      const { node } = thread;
+      const { participants } = node;
+
+      if (participants.length < 1) return null;
+
+      const contact = participants && participants.length > 0
+        && participants.find(
+          (participant) => participant.id !== authenticatedUser.id,
+        );
+
+      return {
+        ...contact,
+        threadId: node.id,
+      };
+    });
+
+    onLoad(contacts);
+  }
+
   componentWillReceiveProps({ loading }) {
     const appContainer = document.querySelector('.app-container');
 
@@ -88,6 +114,7 @@ class GetThreads extends React.Component { // eslint-disable-line react/prefer-s
   }
 
   render() {
+    const { match } = this.props;
     let threads = null;
 
     if (authenticatedUser) {
@@ -104,62 +131,67 @@ class GetThreads extends React.Component { // eslint-disable-line react/prefer-s
           );
 
         return (
-          <Thread key={node.id}>
-            <div className="c-recipient">
-              <User
-                avatar={recipient.avatar}
-                name={recipient.name}
-                username={recipient.username}
-              />
-              <div className="c-stats">
-                <span className="c-date">{lastMessage.createdAt}</span>
+          <Link
+            key={node.id}
+            to={{
+              pathname: `${match.url}/${node.id}`,
+            }}
+          >
+            <Thread>
+              <div className="c-recipient">
+                <User
+                  avatar={recipient.avatar}
+                  name={recipient.name}
+                  username={recipient.username}
+                />
+                <div className="c-stats">
+                  <span className="c-date">{lastMessage.createdAt}</span>
+                </div>
               </div>
-            </div>
-            <div
-              className={`message
-                ${
-                  lastMessage.from.id === authenticatedUser.id
-                  ? ' -outgoing'
-                  : ' -incoming'
-                }
-                ${
-                  lastMessage.unread
-                  ? ' -unread'
-                  : ' -read'
-                }
-              `}
-            >
-              <p>{lastMessage.body}</p>
-              {
-                lastMessage.from.id !== authenticatedUser.id
-                && unReadMessages.count > 0 && (
-                  <span
-                    className="c-status"
-                  >
-                    { unReadMessages.count }
-                  </span>
-                )
-              }
-              {
-                lastMessage.from.id === authenticatedUser.id && (
-                  <span
-                    className="c-status"
-                  >
-                    <span className="c-tick-wrapper">
-                      <Icon
-                        className="a-tick a-tick--single"
-                        icon={ICONS.TICK}
-                      />
-                      <Icon
-                        className="a-tick a-tick--double"
-                        icon={ICONS.TICK}
-                      />
+              <div
+                className={`message${
+                    lastMessage.from.id === authenticatedUser.id
+                    ? ' -outgoing'
+                    : ' -incoming'
+                  }${
+                    lastMessage.unread
+                    ? ' -unread'
+                    : ' -read'
+                  }`}
+              >
+                <p>{lastMessage.body}</p>
+                {
+                  lastMessage.from.id !== authenticatedUser.id
+                  && unReadMessages.count > 0 && (
+                    <span
+                      className="c-status"
+                    >
+                      { unReadMessages.count }
                     </span>
-                  </span>
-                )
-              }
-            </div>
-          </Thread>
+                  )
+                }
+                {
+                  lastMessage.from.id === authenticatedUser.id && (
+                    <span
+                      className="c-status"
+                    >
+                      <span className="c-tick-wrapper">
+                        <Icon
+                          className="a-tick a-tick--single"
+                          icon={ICONS.TICK}
+                        />
+                        <Icon
+                          className="a-tick a-tick--double"
+                          icon={ICONS.TICK}
+                        />
+                      </span>
+                    </span>
+                  )
+                }
+              </div>
+            </Thread>
+          </Link>
+
         );
       });
     }
@@ -174,10 +206,13 @@ class GetThreads extends React.Component { // eslint-disable-line react/prefer-s
 
 GetThreads.defaultProps = {
   loading: true,
+  onLoad: () => ({}),
 };
 
 GetThreads.propTypes = {
   loading: PropTypes.bool,
+  match: PropTypes.object.isRequired,
+  onLoad: PropTypes.func,
   // threads: PropTypes.object,
 };
 
