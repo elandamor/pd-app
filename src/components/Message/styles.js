@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.article`
-  margin-bottom: 8px;
   padding: 0 8px;
   position: relative;
 
@@ -22,7 +21,10 @@ const Wrapper = styled.article`
 
     &.-outgoing {
       border-bottom: 4px solid #02b875;
-      float: right;
+    }
+
+    .c-image {
+      margin-bottom: 4px;
     }
   }
 `;
