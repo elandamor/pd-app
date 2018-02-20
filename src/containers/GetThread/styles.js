@@ -33,7 +33,7 @@ const Wrapper = styled.div`
     width: 100%;
     z-index: 2;
 
-    .c-post-info {
+    .c-recipient {
       align-items: center;
       display: flex;
       overflow: hidden;
@@ -67,18 +67,27 @@ const Wrapper = styled.div`
           text-overflow: ellipsis;
           white-space: nowrap;
 
-          &.a-post-description {
+          &.a-recipient {
             font-size: 13px;
             font-weight: 900;
             letter-spacing: 0.01rem;
-            margin-bottom: -2px;
           }
 
-          &.a-owner {
+          &.a-status {
             color: ${(props) => props.theme.isDark ? '#D3D4D8' : '#555'};
             font-weight: 400;
           }
         }
+      }
+    }
+
+    .c-btn--menu {
+      width: 48px;
+
+      .icon,
+      .icon > svg {
+        height: 22px;
+        width: 22px;
       }
     }
   }
@@ -99,7 +108,6 @@ const Wrapper = styled.div`
 
   .c-section--main {
     -webkit-overflow-scrolling: touch;
-    background-color: #ffffff;
     display: flex;
     flex-direction: column-reverse;
     height: 100%;
@@ -151,6 +159,7 @@ const Wrapper = styled.div`
         margin: 0;
         min-height: 32px;
         padding: 6px 8px;
+        resize: none;
       }
     }
 
