@@ -11,12 +11,11 @@ import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
 import Icon from '../../components/Icon';
 import { ICONS } from '../../components/Icon/constants';
-// import Image from '../../components/Image';
 import Message from '../../components/Message';
 // import Modal from '../../components/Modal';
 import Textarea from '../../components/Textarea';
 // Styled-Components
-import Wrapper from './styles';
+import Wrapper, { Messages, Paginator } from './styles';
 
 hashtag(linkify);
 mention(linkify);
@@ -41,21 +40,9 @@ const recipient = {
 const data = [
   {
     id: Math.round(Math.random() * 1000000),
-    body: 'This is a test message with a @mention and #hashtag.',
-    postDate: '45 minutes ago',
+    body: 'This is a test message...',
+    postDate: '5 minutes ago',
     sentBy: recipient,
-  },
-  {
-    id: Math.round(Math.random() * 1000000),
-    body: '#Phantom is indeed the original. Simply sublime!!!',
-    postDate: '30 minutes ago',
-    sentBy: authenticatedUser,
-  },
-  {
-    id: Math.round(Math.random() * 1000000),
-    body: '@mercedebenz, Thank you for the feedback.',
-    postDate: '15 minutes ago',
-    sentBy: authenticatedUser,
   },
   {
     id: Math.round(Math.random() * 1000000),
@@ -65,9 +52,26 @@ const data = [
   },
   {
     id: Math.round(Math.random() * 1000000),
+    body: '@mercedebenz, Thank you for the feedback.',
+    postDate: '15 minutes ago',
+    sentBy: authenticatedUser,
+  },
+  {
+    id: Math.round(Math.random() * 1000000),
+    body: '#Phantom is indeed the original. Simply sublime!!!',
+    postDate: '30 minutes ago',
+    sentBy: authenticatedUser,
+  },
+  {
+    id: Math.round(Math.random() * 1000000),
     body: 'This is a test message with a @mention and #hashtag.',
-    postDate: '5 minutes ago',
+    postDate: '45 minutes ago',
     sentBy: recipient,
+    attachment: {
+      exists: true,
+      source: 'https://scontent-jnb1-1.cdninstagram.com/vp/92ddbcb853231379b3e1e8c3b11581f6/5B15E392/t51.2885-15/s1080x1080/e15/fr/27581837_353608078449033_9197914472906227712_n.jpg',
+      type: 'image',
+    },
   },
 ];
 
@@ -108,7 +112,9 @@ class GetThread extends Component {
 
     messages = data && data && data.length > 0
       && data.map((message) => {
-        const isSending = message.id < 0;
+        const { attachment } = message;
+
+        // const isSending = message.id < 0;
         const messageType = message.sentBy
           && message.sentBy.id === authenticatedUser.id
           ? '-outgoing' : '-incoming';
@@ -117,13 +123,10 @@ class GetThread extends Component {
           <Message
             key={message.id}
             className="msg"
-          >
-            <div
-              className={`message ${messageType}${isSending ? ' -sending' : ''}`}
-            >
-              {message.body}
-            </div>
-          </Message>
+            direction={messageType}
+            attachment={attachment}
+            body={message.body}
+          />
         );
       });
 
@@ -167,7 +170,12 @@ class GetThread extends Component {
           </Button>
         </header>
         <section className="c-section--main">
-          {messages}
+          <div className="c-inner">
+            <Messages>
+              {messages}
+            </Messages>
+            <Paginator />
+          </div>
         </section>
         <footer className="c-footer--main">
           <div className="c-message-wrapper">
