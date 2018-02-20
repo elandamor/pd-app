@@ -111,7 +111,7 @@ class Rating extends Component {
 }
 
 Rating.defaultProps = {
-  className: '',
+  className: 'c-rating',
   count: 5,
   readonly: false,
   size: 24,
