@@ -30,6 +30,7 @@ const Wrapper = styled.div`
     height: 64px;
     min-height: 64px;
     padding-left: 48px;
+    position: relative;
     width: 100%;
     z-index: 2;
 
@@ -107,12 +108,24 @@ const Wrapper = styled.div`
   }
 
   .c-section--main {
-    -webkit-overflow-scrolling: touch;
-    display: flex;
-    flex-direction: column-reverse;
-    height: 100%;
-    overflow-y: auto;
+    flex: 1 1 0;
+    order: 2;
+    position: relative;
     z-index: 0;
+
+    .c-inner {
+      -webkit-overflow-scrolling: touch;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column-reverse;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
   }
 
   .c-actions {
@@ -131,6 +144,9 @@ const Wrapper = styled.div`
   .c-footer--main {
     background-color: #ffffff;
     box-shadow: 0 -1px 5px #e8e8e8;
+    flex: none;
+    order: 3;
+    position: relative;
     width: 100%;
     z-index: 1;
   }
@@ -189,4 +205,41 @@ const Wrapper = styled.div`
   }
 `;
 
+const Messages = styled.div`
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column-reverse;
+
+  .msg {
+    margin-bottom: 8px;
+
+    &:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    .message {
+      &.-outgoing {
+        float: right;
+      }
+    }
+
+    .message.-outgoing:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  }
+`;
+
+const Paginator = styled.div`
+  min-height: 8px;
+`;
+
 export default Wrapper;
+
+export {
+  Messages,
+  Paginator,
+};
