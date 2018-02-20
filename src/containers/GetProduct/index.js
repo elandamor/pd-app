@@ -19,6 +19,7 @@ import { ICONS } from '../../components/Icon/constants';
 import Image from '../../components/Image';
 import Like from '../../components/Button/Like';
 import Modal from '../../components/Modal';
+import Rating from '../../components/Rating';
 import Reviews from '../../components/Reviews';
 // import User from '../../components/User';
 // Styled-Components
@@ -223,26 +224,30 @@ class GetProduct extends Component {
           </div>
           <div className="c-product-info">
             <h2 className="a-name">{productName}</h2>
-            <div className="c-metadata" />
-            <div className="c-actions">
-              <Like
-                aria-label="Like"
-                aria-checked={false}
-                data-count={0}
-                data-themed={false}
-              />
-              <Modal
-                trigger={(
-                  <Collect
-                    aria-label="Collect"
-                    aria-checked
-                    data-themed={false}
-                  />
-                )}
-                unmountOnExit
-              >
-                <div />
-              </Modal>
+            <div className="c-action-wrapper">
+              <div className="c-metadata">
+                <Rating value={4} readonly />
+              </div>
+              <div className="c-actions">
+                <Like
+                  aria-label="Like"
+                  aria-checked={false}
+                  data-count={0}
+                  data-themed={false}
+                />
+                <Modal
+                  trigger={(
+                    <Collect
+                      aria-label="Collect"
+                      aria-checked
+                      data-themed={false}
+                    />
+                  )}
+                  unmountOnExit
+                >
+                  <div />
+                </Modal>
+              </div>
             </div>
           </div>
           <div className="c-purchase-info">
