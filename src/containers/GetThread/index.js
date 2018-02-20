@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as linkify from 'linkifyjs';
 // import Linkify from 'linkifyjs/react';
@@ -7,12 +7,12 @@ import hashtag from 'linkifyjs/plugins/hashtag';
 import mention from 'linkifyjs/plugins/mention';
 import noScroll from 'no-scroll';
 // Components
-// import Avatar from '../../components/Avatar';
+import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
 import Icon from '../../components/Icon';
 import { ICONS } from '../../components/Icon/constants';
 // import Image from '../../components/Image';
-// import Like from '../../components/Button/Like';
+import Message from '../../components/Message';
 // import Modal from '../../components/Modal';
 import Textarea from '../../components/Textarea';
 // Styled-Components
@@ -94,6 +94,12 @@ class GetThread extends Component {
     this.setState({ [evt.target.name]: evt.target.value });
   }
 
+  sendMessage = () => {
+    const { messageText } = this.state;
+
+    console.log('Sending...', messageText);
+  }
+
   render() {
     const { className, history } = this.props;
     const { messageText } = this.state;
@@ -108,13 +114,16 @@ class GetThread extends Component {
           ? '-outgoing' : '-incoming';
 
         return (
-          <div className="msg" key={message.id}>
+          <Message
+            key={message.id}
+            className="msg"
+          >
             <div
-              className={`message ${messageType}${isSending ? ' is-sending' : ''}`}
+              className={`message ${messageType}${isSending ? ' -sending' : ''}`}
             >
               {message.body}
             </div>
-          </div>
+          </Message>
         );
       });
 
@@ -125,10 +134,36 @@ class GetThread extends Component {
         <header className="c-header--main">
           <Button
             className="c-btn--close"
-            aria-label="Go back to feed"
+            aria-label="Go back to threads"
             onClick={() => history.goBack()}
           >
             <Icon icon={ICONS.BACK} />
+          </Button>
+          <div className="c-recipient">
+            <Link
+              to={{
+                pathname: `/@${recipient.username}`,
+              }}
+            >
+              <Avatar
+                src={recipient.avatar}
+              />
+              <div className="c-info">
+                <span className="a-recipient">
+                  {recipient.name}
+                </span>
+                <span className="a-status">
+                  Online
+                </span>
+              </div>
+            </Link>
+          </div>
+          <Button
+            className="c-btn--menu"
+            aria-label="Open thread menu"
+            onClick={() => console.log('Opening menu...')}
+          >
+            <Icon icon={ICONS.MORE_VERT} />
           </Button>
         </header>
         <section className="c-section--main">
@@ -158,6 +193,7 @@ class GetThread extends Component {
                     <Button
                       className="c-btn c-btn--send"
                       aria-label="Send"
+                      onClick={this.sendMessage}
                     />
                   </div>
                 )
