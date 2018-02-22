@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import noScroll from 'no-scroll';
 
 const modalContainer = document.getElementById('c-modal-container');
 const modalOverlay = document.getElementById('c-modal-overlay');
@@ -20,8 +21,8 @@ class Portal extends Component {
     this.el.className = `c-modal${props.className || ''}`;
 
     this.el.setAttribute('role', 'dialog');
-    this.el.setAttribute('aria-labelledby', 'dialog-title');
-    this.el.setAttribute('aria-describedby', 'dialog-description');
+    // this.el.setAttribute('aria-labelledby', 'dialog-title');
+    // this.el.setAttribute('aria-describedby', 'dialog-description');
   }
 
   componentDidMount = () => {
@@ -34,9 +35,11 @@ class Portal extends Component {
 
       if (this.el.classList.contains('entering')) {
         modalOverlay.className = '-active';
+        noScroll.on();
       }
 
       if (this.el.classList.contains('exiting')) {
+        noScroll.off();
         modalOverlay.className = '-inactive';
       }
     }

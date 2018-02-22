@@ -62,6 +62,10 @@ injectGlobal`
     }
   }
 
+  [aria-hidden="true"] {
+    pointer-events: none;
+  }
+
   [href] {
     color: inherit;
     text-decoration: none;

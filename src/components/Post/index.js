@@ -4,12 +4,12 @@
  */
 
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import * as linkify from 'linkifyjs';
 import Linkify from 'linkifyjs/react';
 import hashtag from 'linkifyjs/plugins/hashtag';
 import mention from 'linkifyjs/plugins/mention';
+import { unique } from 'shorthash';
 // Components
 import ComposeMessage from '../Button/ComposeMessage';
 import Like from '../Button/Like';
@@ -26,7 +26,7 @@ mention(linkify);
 class Post extends Component {
   onLinkable = ({ evt, pathname }) => {
     const { history } = this.props;
-    const target = evt.target;
+    const { target } = evt;
 
     let route = pathname;
 
@@ -35,7 +35,7 @@ class Post extends Component {
     const isLinkified = isHashtag || isMention;
 
     if (isLinkified) {
-      route = `${evt.target.pathname}${evt.target.search}`;
+      route = `${target.pathname}${target.search}`;
     }
 
     history.push(route);
@@ -47,9 +47,9 @@ class Post extends Component {
       postDate,
       postDescription,
       postImages,
-      postedBy
+      postedBy,
     } = {
-      postId: Math.round(Math.random() * 1000000),
+      postId: unique(Math.round(Math.random() * 1000000).toString()),
       postDate: 'about 3 hours ago',
       postDescription: 'The undeniable allure of refined luxury - #RangeRover. Search "Range Rover test drive" to experience first class travel at its finest. #RangeRover #PHEV #HybridElectricVehicle #HybridSUV #Carsofinstagram #Technology #Luxury #LuxurySUV',
       postImages: [{
@@ -61,7 +61,7 @@ class Post extends Component {
         avatar: '',
         name: 'Land Rover',
         username: 'landrover',
-      }
+      },
     };
 
     const inFeed = true;
@@ -94,6 +94,7 @@ class Post extends Component {
                 ? `/f/post/${postId}`
                 : `/@${postedBy.username}/posts/${postId}`,
             })}
+            role="presentation"
           >
             <figure>
               {
@@ -156,7 +157,7 @@ class Post extends Component {
 }
 
 Post.propTypes = {
-
+  history: PropTypes.object.isRequired,
 };
 
 export default Post;

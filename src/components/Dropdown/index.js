@@ -24,7 +24,7 @@ class Dropdown extends React.Component {
   }
 
   handleChange = (evt) => {
-    const target = evt.target;
+    const { target } = evt;
 
     this.setState({
       selected: {
@@ -94,7 +94,7 @@ class Dropdown extends React.Component {
           </span>
         </div>
         <ul
-          className={`c-dropdown__list`}
+          className="c-dropdown__list"
           data-dropdown-list={name}
           aria-labelledby={`dd-${name}`}
           role="listbox"
@@ -107,7 +107,7 @@ class Dropdown extends React.Component {
 }
 
 Dropdown.defaultProps = {
-  options: [],
+
 };
 
 Dropdown.propTypes = {

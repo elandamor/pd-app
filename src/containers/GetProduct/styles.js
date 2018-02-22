@@ -103,22 +103,6 @@ const Wrapper = styled.div`
     overflow-y: auto;
     padding-bottom: 104px;
     z-index: 0;
-
-    .c-product-owner {
-      display: none;
-    }
-  }
-
-  .c-product-owner {
-    align-items: center;
-    display: flex;
-    justify-content: stretch;
-
-    .c-user {
-      flex: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
   }
 
   .c-image-wrapper {
@@ -134,28 +118,39 @@ const Wrapper = styled.div`
   }
 
   .c-product-info {
-    padding: 12px;
-
     .a-name {
-      margin: 0;
+      margin: 8px 12px 0;
+    }
+
+    .c-action-wrapper {
+      display: flex;
+      justify-content: stretch;
+    }
+
+    .c-metadata {
+      align-items: center;
+      display: flex;
+      flex: 1;
+      padding: 0 12px;
     }
 
     .c-rating {
       align-items: center;
       display: flex;
-      margin-top: 12px;
+      margin: 12px 0;
+      overflow: hidden;
 
-      .icon,
-      svg {
-        height: 16px;
-        width: 16px;
+      .c-star,
+      .c-star > .icon,
+      .c-star > .icon > svg {
+        height: 18px;
+        width: 18px;
       }
     }
 
     .c-actions {
       display: flex;
       justify-content: flex-end;
-      margin: 0 -12px 0 0;
     }
 
     .c-btn--like {
@@ -260,7 +255,7 @@ const Wrapper = styled.div`
    * Reviews
    */
 
-  .a-subtitle {
+  .a-heading--sub {
     padding-left: 12px;
   }
 `;
@@ -324,12 +319,6 @@ const Customiser = styled.div`
           height: 20px;
           width: 20px;
         }
-
-        ${'' /* span {
-          display: inline-block;
-          font-size: 16px;
-          letter-spacing: 0.01rem;
-        } */}
       }
     }
   }

@@ -57,7 +57,10 @@ class Account extends Component {
     const { isOpen } = this.state;
 
     return authenticatedUser ? (
-      <Wrapper className={`${isOpen ? 'is-open' : ''}`}>
+      <Wrapper
+        className={`${isOpen ? 'is-open' : ''}`}
+        inert
+      >
         <Button
           aria-label="Toggle Account Menu"
           className="c-bttn-toggle"
@@ -82,56 +85,66 @@ class Account extends Component {
           </div>
           <div className="c-acc__content">
             <nav>
-            <ul role="menu">
-              <li className="list-item">
-                <NavLink
-                  activeClassName="-active"
-                  to="/membership"
-                  role="menuitem"
-                  tabIndex="-1"
-                  onClick={this.closeAccountMenu}
-                >Become a gold member</NavLink>
-              </li>
-              <li className="list-item list-item--separator"></li>
-              <li className="list-item">
-                <NavLink
-                  activeClassName="-active"
-                  to="/collections"
-                  role="menuitem"
-                  tabIndex="-1"
-                  onClick={this.closeAccountMenu}
-                >Collections</NavLink>
-              </li>
-              <li className="list-item">
-                <NavLink
-                  activeClassName="-active"
-                  to="/interests"
-                  role="menuitem"
-                  tabIndex="-1"
-                  onClick={this.closeAccountMenu}
-                >Customize your interests</NavLink>
-              </li>
-              <li className="list-item list-item--separator"></li>
-              <li className="list-item">
-                <NavLink
-                  activeClassName="-active"
-                  to="/settings"
-                  role="menuitem"
-                  tabIndex="-1"
-                  onClick={this.closeAccountMenu}
-                >Settings</NavLink>
-              </li>
-              <li className="list-item">
-                <NavLink
-                  activeClassName="-active"
-                  to="/help"
-                  role="menuitem"
-                  tabIndex="-1"
-                  onClick={this.closeAccountMenu}
-                >Help</NavLink>
-              </li>
-              <li className="list-item list-item--separator"></li>
-            </ul>
+              <ul role="menu">
+                <li className="list-item">
+                  <NavLink
+                    activeClassName="-active"
+                    to="/membership"
+                    role="menuitem"
+                    tabIndex="-1"
+                    onClick={this.closeAccountMenu}
+                  >
+                    Become a gold member
+                  </NavLink>
+                </li>
+                <li className="list-item list-item--separator" />
+                <li className="list-item">
+                  <NavLink
+                    activeClassName="-active"
+                    to="/collections"
+                    role="menuitem"
+                    tabIndex="-1"
+                    onClick={this.closeAccountMenu}
+                  >
+                    Collections
+                  </NavLink>
+                </li>
+                <li className="list-item">
+                  <NavLink
+                    activeClassName="-active"
+                    to="/interests"
+                    role="menuitem"
+                    tabIndex="-1"
+                    onClick={this.closeAccountMenu}
+                  >
+                    Customize your interests
+                  </NavLink>
+                </li>
+                <li className="list-item list-item--separator" />
+                <li className="list-item">
+                  <NavLink
+                    activeClassName="-active"
+                    to="/settings"
+                    role="menuitem"
+                    tabIndex="-1"
+                    onClick={this.closeAccountMenu}
+                  >
+                    Settings
+                  </NavLink>
+                </li>
+                <li className="list-item">
+                  <NavLink
+                    activeClassName="-active"
+                    to="/help"
+                    role="menuitem"
+                    tabIndex="-1"
+                    onClick={this.closeAccountMenu}
+                  >
+                    Help
+                  </NavLink>
+                </li>
+                <li className="list-item list-item--separator" />
+              </ul>
             </nav>
           </div>
           <div className="c-acc__footer">
@@ -147,6 +160,10 @@ class Account extends Component {
     ) : null;
   }
 }
+
+Account.defaultProps = {
+  history: {},
+};
 
 Account.propTypes = {
   authenticatedUser: PropTypes.object.isRequired,

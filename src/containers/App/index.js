@@ -12,7 +12,7 @@ import Home from '../../pages/Home/Loadable';
 import Messages from '../../pages/Messages/Loadable';
 import Notifications from '../../pages/Notifications/Loadable';
 // Styled-Components
-import Wrapper, { Footer, Main } from './styles';
+import Wrapper, { Footer, Page } from './styles';
 
 const GET_AUTHENTICATED_USER = gql`
   query getAuthenticatedUser {
@@ -39,20 +39,20 @@ class App extends Component {
       variables: {
         user: {
           __typename: 'User',
-          id: 1,
-          name: 'Thandolwethu Mpofu',
-          username: 'elandamor',
-        }
-      }
+          id: 3,
+          name: 'Rolls-Royce Motor Cars',
+          username: 'rollsroycecars',
+        },
+      },
     });
   }
 
   getAuthenticatedUser = async () => {
     const { client } = this.props;
-    const authenticatedUser = await client.query({
+
+    await client.query({
       query: GET_AUTHENTICATED_USER,
-    }).then(({data: { authenticatedUser }}) => authenticatedUser);
-    console.log({ authenticatedUser })
+    });
   }
 
   render() {
@@ -69,7 +69,7 @@ class App extends Component {
             authenticatedUser={authenticatedUser}
           />
         </Header>
-        <Main className="c-app-main">
+        <Page className="c-app-page">
           <Switch>
             <Route
               exact
@@ -103,7 +103,7 @@ class App extends Component {
               )}
             />
           </Switch>
-        </Main>
+        </Page>
         <Footer className="c-app-footer">
           <MobileNav />
         </Footer>

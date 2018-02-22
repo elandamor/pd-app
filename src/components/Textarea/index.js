@@ -31,11 +31,21 @@ const Wrapper = styled.div`
 `;
 
 const Textarea = (props) => {
-  const { id, label } = props;
+  const { id, label, srlabel } = props;
 
   return (
     <Wrapper className="c-textarea__wrapper">
       { label && <label htmlFor={id}>{label}</label> }
+      {
+        srlabel && (
+          <label
+            className="sr-only"
+            htmlFor={id}
+          >
+            {srlabel}
+          </label>
+        )
+      }
       <TextareaAutosize {...props} />
     </Wrapper>
   );
@@ -44,6 +54,7 @@ const Textarea = (props) => {
 Textarea.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string,
+  srlabel: PropTypes.string,
 };
 
 export default Textarea;

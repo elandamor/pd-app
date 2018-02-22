@@ -6,6 +6,7 @@ import Linkify from 'linkifyjs/react';
 import hashtag from 'linkifyjs/plugins/hashtag';
 import mention from 'linkifyjs/plugins/mention';
 import numeral from 'numeral';
+import noScroll from 'no-scroll';
 // Components
 import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
@@ -18,7 +19,7 @@ import Image from '../../components/Image';
 import Like from '../../components/Button/Like';
 import Modal from '../../components/Modal';
 import Reviews from '../../components/Reviews';
-import User from '../../components/User';
+// import User from '../../components/User';
 // Styled-Components
 import Wrapper, { Customiser } from './styles';
 
@@ -82,12 +83,10 @@ const reviews = {
   ],
 };
 
-const quantities = [...Array(10).keys()].map((key, idx) => {
-  return {
-    name: idx + 1,
-    value: idx + 1,
-  }
-});
+const quantities = [...Array(10).keys()].map((key, idx) => ({
+  name: idx + 1,
+  value: idx + 1,
+}));
 
 class GetService extends Component {
   constructor(props) {
@@ -98,23 +97,19 @@ class GetService extends Component {
     };
   }
 
-  handleQuantity = (quantity) => {
-    this.setState({
-      quantity: quantity.value,
-    });
-  }
-
   componentWillMount = () => {
+    noScroll.on();
     modalOverlay.className = '-active';
   }
 
   componentWillUnmount = () => {
     modalOverlay.className = '-inactive';
+    noScroll.off();
   }
 
   onLinkable = ({ evt, pathname }) => {
     const { history } = this.props;
-    const target = evt.target;
+    const { target } = evt;
 
     let route = pathname;
 
@@ -129,6 +124,12 @@ class GetService extends Component {
     history.push(route);
   }
 
+  handleQuantity = (quantity) => {
+    this.setState({
+      quantity: quantity.value,
+    });
+  }
+
   render() {
     const { className, history } = this.props;
     const { quantity } = this.state;
@@ -141,12 +142,12 @@ class GetService extends Component {
       serviceDescription,
       serviceImages,
       perCharge,
-      postedBy
+      postedBy,
     } = {
       serviceId: Math.round(Math.random() * 1000000),
       serviceDate: '2 days ago',
-      serviceName: 'Express Service',
-      servicePrice: '150',
+      serviceName: 'Express Service by Mercedes-Benz',
+      servicePrice: 'FREE',
       serviceDescription: "It's fast, thorough, and even more convenient. It's Express Service, and it's here for you. Along with an oil change, tire-rotation, and battery check, Express service includes a 37-point inspection that covers the major components of your Mercedes-Benz. All in about an hour or less.",
       serviceImages: [
         {
@@ -155,7 +156,7 @@ class GetService extends Component {
         }, {
           id: Math.round(Math.random() * 1000000),
           url: 'https://www.standard.co.uk/s3fs-public/thumbnails/image/2017/06/01/15/rolls-royce-8.png',
-        }
+        },
       ],
       perCharge: 'hr',
       postedBy: {
@@ -163,18 +164,19 @@ class GetService extends Component {
         avatar: '',
         name: 'Mercedes-Benz',
         username: 'mercedesbenz',
-      }
+      },
     };
 
     const hasImages = serviceImages && serviceImages.length > 0;
 
     return (
       <Wrapper
-        className={`c-service-viewer${className ? className : ''}`}
+        className={`c-service-viewer${className || ''}`}
       >
         <header className="c-header--main">
           <Button
             className="c-btn--close"
+            aria-label="Go back to feed"
             onClick={() => history.goBack()}
           >
             <Icon icon={ICONS.BACK} />
@@ -208,22 +210,7 @@ class GetService extends Component {
           </div>
         </header>
         <section className="c-section--main">
-          <div className="c-service-owner">
-            <User
-              avatar={postedBy.avatar}
-              name={postedBy.name}
-              username={postedBy.username}
-            />
-            <Modal
-              trigger={(
-                <ComposeMessage />
-              )}
-              unmountOnExit
-            >
-              <div />
-            </Modal>
-          </div>
-          <div className="c-image-wrapper" role="figure">
+          <div className="c-image-wrapper">
             {
               hasImages && (
                 <Image
@@ -237,7 +224,7 @@ class GetService extends Component {
           </div>
           <div className="c-service-info">
             <h2 className="a-name">{serviceName}</h2>
-            <div className="c-metadata"></div>
+            <div className="c-metadata" />
             <div className="c-actions">
               <Like
                 aria-label="Like"
@@ -249,7 +236,7 @@ class GetService extends Component {
                 trigger={(
                   <Collect
                     aria-label="Collect"
-                    aria-checked={true}
+                    aria-checked
                     data-themed={false}
                   />
                 )}
@@ -325,7 +312,7 @@ class GetService extends Component {
           >
             {serviceDescription}
           </Linkify>
-          <h3 class="a-subtitle">Reviews</h3>
+          <h3 className="a-heading--sub">Reviews</h3>
           <Reviews data={reviews.data} />
         </section>
       </Wrapper>
@@ -333,8 +320,13 @@ class GetService extends Component {
   }
 }
 
+GetService.defaultProps = {
+  className: '',
+};
+
 GetService.propTypes = {
   className: PropTypes.string,
+  history: PropTypes.object.isRequired,
 };
 
 export default GetService;

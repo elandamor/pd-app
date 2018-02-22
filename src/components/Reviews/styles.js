@@ -11,7 +11,7 @@ const Review = styled.li`
   display: flex;
   flex-direction: column;
   list-style-type: none;
-  margin-bottom: 12px;
+  margin-bottom: 4px;
   padding: 0;
 
   &:last-child {
@@ -77,7 +77,7 @@ const Review = styled.li`
     font-size: 14px;
     font-weight: 400;
     line-height: 1.35;
-    margin: 6px 0 12px;
+    margin: -4px 0 12px;
     padding: 0 12px 0;
 
     [href] {

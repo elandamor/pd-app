@@ -6,6 +6,8 @@ import Linkify from 'linkifyjs/react';
 import hashtag from 'linkifyjs/plugins/hashtag';
 import mention from 'linkifyjs/plugins/mention';
 import numeral from 'numeral';
+import noScroll from 'no-scroll';
+import { unique } from 'shorthash';
 // Components
 import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
@@ -17,8 +19,9 @@ import { ICONS } from '../../components/Icon/constants';
 import Image from '../../components/Image';
 import Like from '../../components/Button/Like';
 import Modal from '../../components/Modal';
+import Rating from '../../components/Rating';
 import Reviews from '../../components/Reviews';
-import User from '../../components/User';
+// import User from '../../components/User';
 // Styled-Components
 import Wrapper, { Customiser } from './styles';
 
@@ -82,12 +85,10 @@ const reviews = {
   ],
 };
 
-const quantities = [...Array(10).keys()].map((key, idx) => {
-  return {
-    name: idx + 1,
-    value: idx + 1,
-  }
-});
+const quantities = [...Array(10).keys()].map((key, idx) => ({
+  name: idx + 1,
+  value: idx + 1,
+}));
 
 class GetProduct extends Component {
   constructor(props) {
@@ -98,23 +99,19 @@ class GetProduct extends Component {
     };
   }
 
-  handleQuantity = (quantity) => {
-    this.setState({
-      quantity: quantity.value,
-    });
-  }
-
   componentWillMount = () => {
+    noScroll.on();
     modalOverlay.className = '-active';
   }
 
   componentWillUnmount = () => {
     modalOverlay.className = '-inactive';
+    noScroll.off();
   }
 
   onLinkable = ({ evt, pathname }) => {
     const { history } = this.props;
-    const target = evt.target;
+    const { target } = evt;
 
     let route = pathname;
 
@@ -129,6 +126,12 @@ class GetProduct extends Component {
     history.push(route);
   }
 
+  handleQuantity = (quantity) => {
+    this.setState({
+      quantity: quantity.value,
+    });
+  }
+
   render() {
     const { className, history } = this.props;
     const { quantity } = this.state;
@@ -140,9 +143,9 @@ class GetProduct extends Component {
       productPrice,
       productDescription,
       productImages,
-      postedBy
+      postedBy,
     } = {
-      productId: Math.round(Math.random() * 1000000),
+      productId: unique(Math.round(Math.random() * 1000000)),
       productDate: '2 days ago',
       productName: 'Rolls-Royce Wraith Black Badge',
       productPrice: parseInt('400000', 10),
@@ -154,25 +157,26 @@ class GetProduct extends Component {
         }, {
           id: Math.round(Math.random() * 1000000),
           url: 'https://www.standard.co.uk/s3fs-public/thumbnails/image/2017/06/01/15/rolls-royce-8.png',
-        }
+        },
       ],
       postedBy: {
         id: 1,
         avatar: '',
         name: 'Rolls-Royce Motor Cars',
         username: 'rollsroycemotorcars',
-      }
+      },
     };
 
     const hasImages = productImages && productImages.length > 0;
 
     return (
       <Wrapper
-        className={`c-product-viewer${className ? className : ''}`}
+        className={`c-product-viewer${className || ''}`}
       >
         <header className="c-header--main">
           <Button
             className="c-btn--close"
+            aria-label="Go back to feed"
             onClick={() => history.goBack()}
           >
             <Icon icon={ICONS.BACK} />
@@ -206,22 +210,7 @@ class GetProduct extends Component {
           </div>
         </header>
         <section className="c-section--main">
-          <div className="c-product-owner">
-            <User
-              avatar={postedBy.avatar}
-              name={postedBy.name}
-              username={postedBy.username}
-            />
-            <Modal
-              trigger={(
-                <ComposeMessage />
-              )}
-              unmountOnExit
-            >
-              <div />
-            </Modal>
-          </div>
-          <div className="c-image-wrapper" role="figure">
+          <div className="c-image-wrapper">
             {
               hasImages && (
                 <Image
@@ -235,26 +224,30 @@ class GetProduct extends Component {
           </div>
           <div className="c-product-info">
             <h2 className="a-name">{productName}</h2>
-            <div className="c-metadata"></div>
-            <div className="c-actions">
-              <Like
-                aria-label="Like"
-                aria-checked={false}
-                data-count={0}
-                data-themed={false}
-              />
-              <Modal
-                trigger={(
-                  <Collect
-                    aria-label="Collect"
-                    aria-checked={true}
-                    data-themed={false}
-                  />
-                )}
-                unmountOnExit
-              >
-                <div />
-              </Modal>
+            <div className="c-action-wrapper">
+              <div className="c-metadata">
+                <Rating value={4} readonly />
+              </div>
+              <div className="c-actions">
+                <Like
+                  aria-label="Like"
+                  aria-checked={false}
+                  data-count={0}
+                  data-themed={false}
+                />
+                <Modal
+                  trigger={(
+                    <Collect
+                      aria-label="Collect"
+                      aria-checked
+                      data-themed={false}
+                    />
+                  )}
+                  unmountOnExit
+                >
+                  <div />
+                </Modal>
+              </div>
             </div>
           </div>
           <div className="c-purchase-info">
@@ -314,7 +307,7 @@ class GetProduct extends Component {
           >
             {productDescription}
           </Linkify>
-          <h3 className="a-subtitle">Reviews</h3>
+          <h3 className="a-heading--sub">Reviews</h3>
           <Reviews data={reviews.data} />
         </section>
       </Wrapper>
@@ -322,8 +315,13 @@ class GetProduct extends Component {
   }
 }
 
+GetProduct.defaultProps = {
+  className: '',
+};
+
 GetProduct.propTypes = {
   className: PropTypes.string,
+  history: PropTypes.object.isRequired,
 };
 
 export default GetProduct;
