@@ -8,28 +8,17 @@ import React from 'react';
 import { compose, graphql } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import PropTypes from 'prop-types';
+// Queries
+import getCategoriesGQL from '../../graphql/queries/getCategories.gql';
 // Styled-Components
 import Wrapper, { Category } from './styles';
-
-const GET_CATEGORIES = gql`
-  query getCategories($limit: Int) {
-    categories: categoriesQuery(limit: $limit) {
-      edges {
-        node {
-          id
-          name
-        }
-      }
-    }
-  }
-`;
 
 // eslint-disable-next-line react/prefer-stateless-function
 class GetCatagories extends React.Component {
   componentWillReceiveProps = ({ fetchMore, loading }) => {
     if (!loading && fetchMore) {
       fetchMore({
-        query: GET_CATEGORIES,
+        query: getCategoriesGQL,
         updateQuery: (previousResult, { fetchMoreResult }) => {
           const newCategories = fetchMoreResult.categories;
 
@@ -109,7 +98,7 @@ const mapCategoriesToProps = ({ data }) => {
 };
 
 export default compose(
-  graphql(GET_CATEGORIES, {
+  graphql(getCategoriesGQL, {
     options: ({ first }) => ({
       variables: {
         limit: first,
