@@ -6,7 +6,6 @@
 
 import React from 'react';
 import { compose, graphql } from 'react-apollo';
-import { gql } from 'apollo-boost';
 import PropTypes from 'prop-types';
 // Queries
 import getCategoriesGQL from '../../graphql/queries/getCategories.gql';
