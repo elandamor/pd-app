@@ -1,0 +1,8 @@
+mutation editSettings($input: EditCompanyInput!) {
+  settings: editCompany(input: $input) {
+    id
+    bio
+    phone
+    website
+  }
+}

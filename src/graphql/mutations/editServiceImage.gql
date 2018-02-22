@@ -1,0 +1,7 @@
+#import "../fragments/serviceImage.gql"
+
+mutation editServiceImage($input: EditServiceImageInput!) {
+  editServiceImage(input: $input) {
+    ...serviceImage
+  }
+}

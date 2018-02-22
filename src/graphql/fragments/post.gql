@@ -1,0 +1,21 @@
+#import "./postImage.gql"
+#import "./user.gql"
+
+fragment post on Post {
+  id
+  intro
+  description
+  created_at
+  images {
+    ...postImage
+  }
+  postedBy: user {
+    ...user
+  }
+  likes {
+    user_id
+  }
+  likesCount {
+    count
+  }
+}

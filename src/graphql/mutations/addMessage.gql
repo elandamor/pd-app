@@ -1,0 +1,11 @@
+#import "../fragments/user.gql"
+
+mutation addMessage($input: AddMessageInput!) {
+  addMessage(input: $input) {
+    id
+    body
+    sentBy: user {
+      ...user
+    }
+  }
+}

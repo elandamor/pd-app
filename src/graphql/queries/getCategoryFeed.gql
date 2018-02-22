@@ -1,0 +1,10 @@
+#import "../fragments/post.gql"
+#import "../fragments/product.gql"
+
+query getFeed($categoryId: ID!, $filter: String = "") {
+  feed: categoryFeedQuery(categoryId: $categoryId, filter: $filter) {
+    __typename
+    ...post
+    ...product
+  }
+}

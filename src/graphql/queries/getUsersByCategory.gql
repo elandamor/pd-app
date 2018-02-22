@@ -1,0 +1,11 @@
+#import "../fragments/user.gql"
+
+query getUsers($categoryIds: [ID]!) {
+  users(categoryIds: $categoryIds) {
+    edges {
+      node {
+        ...user
+      }
+    }
+  }
+}

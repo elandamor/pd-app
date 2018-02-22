@@ -1,0 +1,19 @@
+#import "../fragments/user.gql"
+
+query getUser($username: String!) {
+  user: getUser(username: $username) {
+    ...user
+    settings: companies {
+      id
+      bio
+      website
+      phone
+    }
+    endorsements {
+      id
+    }
+    reviews {
+      id
+    }
+  }
+}

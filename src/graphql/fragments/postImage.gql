@@ -1,0 +1,4 @@
+fragment postImage on PostImage {
+  id
+  url
+}

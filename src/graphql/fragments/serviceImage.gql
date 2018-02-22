@@ -1,0 +1,4 @@
+fragment serviceImage on ServiceImage {
+  id
+  url
+}

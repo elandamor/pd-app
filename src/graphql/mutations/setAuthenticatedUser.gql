@@ -1,0 +1,7 @@
+#import "../fragments/user.gql"
+
+mutation setAuthenticatedUser($user: Object!) {
+  authenticatedUser: setAuthenticatedUser(user: $user) @client {
+    ...user
+  }
+}

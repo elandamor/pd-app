@@ -1,0 +1,20 @@
+#import "../fragments/product.gql"
+#import "../fragments/user.gql"
+
+query getProducts($userId: ID!, $limit: Int, $after: ID) {
+  products: productsQuery(userId: $userId, limit: $limit, after: $after) {
+    edges {
+      node {
+        ...product
+        reviews {
+          id
+          description
+          rating
+          reviewedBy: reviewer {
+            ...user
+          }
+        }
+      }
+    }
+  }
+}

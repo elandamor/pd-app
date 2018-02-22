@@ -1,0 +1,18 @@
+#import "../fragments/user.gql"
+
+query getUserReviews($userId: ID!) {
+  reviews: reviewsQuery(userId: $userId) {
+    edges {
+      node {
+        id
+        title
+        description
+        rating
+        reviewedBy: reviewer {
+          ...user
+        }
+        created_at
+      }
+    }
+  }
+}

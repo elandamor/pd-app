@@ -1,0 +1,12 @@
+#import "../fragments/user.gql"
+
+mutation addEndorsement($input: AddEndorsementInput!) {
+  endorsement: addEndorsement(input: $input) {
+    authentic
+    quality
+    endorsedBy: endorser {
+      ...user
+    }
+    created_at
+  }
+}

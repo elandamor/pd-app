@@ -1,0 +1,24 @@
+#import "./serviceImage.gql"
+#import "./user.gql"
+
+fragment service on Service {
+  id
+  name
+  price
+  per_charge
+  intro
+  description
+  created_at
+  images {
+    ...serviceImage
+  }
+  postedBy: user {
+    ...user
+  }
+  likes {
+    user_id
+  }
+  likesCount {
+    count
+  }
+}

@@ -1,0 +1,11 @@
+#import "../fragments/user.gql"
+
+query getContacts($userId: ID!) {
+  contacts: contactsQuery(userId: $userId) {
+    edges {
+      node {
+        ...user
+      }
+    }
+  }
+}

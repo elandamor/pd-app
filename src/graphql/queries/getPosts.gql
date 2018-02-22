@@ -1,0 +1,20 @@
+#import "../fragments/post.gql"
+#import "../fragments/user.gql"
+
+query getPosts($userId: ID!, $limit: Int, $after: ID) {
+  posts: postsQuery(userId: $userId, limit: $limit, after: $after) {
+    edges {
+      node {
+        ...post
+        comments {
+          id
+          body
+          created_at
+          postedBy: user {
+            ...user
+          }
+        }
+      }
+    }
+  }
+}

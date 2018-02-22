@@ -1,0 +1,15 @@
+#import "../fragments/user.gql"
+
+query getServiceReviews($id: ID!) {
+  service(id: $id) {
+    id
+    reviews {
+      id
+      description
+      rating
+      reviewedBy: reviewer {
+        ...user
+      }
+    }
+  }
+}

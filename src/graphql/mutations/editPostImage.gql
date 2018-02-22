@@ -1,0 +1,7 @@
+#import "../fragments/postImage.gql"
+
+mutation editPostImage($input: EditPostImageInput!) {
+  editPostImage(input: $input) {
+    ...postImage
+  }
+}

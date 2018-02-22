@@ -1,0 +1,15 @@
+#import "../fragments/user.gql"
+
+query getProductReviews($id: ID!) {
+  product(id: $id) {
+    id
+    reviews {
+      id
+      description
+      rating
+      reviewedBy: reviewer {
+        ...user
+      }
+    }
+  }
+}

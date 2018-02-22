@@ -1,0 +1,7 @@
+#import "../fragments/post.gql"
+
+mutation editPost($input: EditPostInput!) {
+  editPost(input: $input) {
+    ...post
+  }
+}

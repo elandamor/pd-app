@@ -1,0 +1,7 @@
+#import "../fragments/service.gql"
+
+mutation editService($input: EditServiceInput!) {
+  editService(input: $input) {
+    ...service
+  }
+}

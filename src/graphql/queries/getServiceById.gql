@@ -1,0 +1,17 @@
+#import "../fragments/service.gql"
+#import "../fragments/user.gql"
+
+query getServiceById($id: ID!, $withReviews: Boolean = false) {
+  service(id: $id) {
+    ...service
+    reviews @include(if: $withReviews) {
+      id
+      title
+      rating
+      description
+      reviewedBy: reviewer {
+        ...user
+      }
+    }
+  }
+}

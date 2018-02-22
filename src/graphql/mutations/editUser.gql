@@ -1,0 +1,7 @@
+#import "../fragments/user.gql"
+
+mutation editUser($input: EditUserInput!) {
+  editUser(input: $input) {
+    ...user
+  }
+}

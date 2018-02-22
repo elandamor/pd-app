@@ -1,0 +1,10 @@
+query getCategories($limit: Int) {
+  categories: categoriesQuery(limit: $limit) {
+    edges {
+      node {
+        id
+        name
+      }
+    }
+  }
+}

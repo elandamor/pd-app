@@ -1,0 +1,7 @@
+query getSettingsId($username: String!) {
+  getSettingsId: getUser(username: $username) {
+    settings: companies {
+      id
+    }
+  }
+}

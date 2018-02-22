@@ -1,0 +1,23 @@
+#import "./productImage.gql"
+#import "./user.gql"
+
+fragment product on Product {
+  id
+  name
+  price
+  intro
+  description
+  created_at
+  images {
+    ...productImage
+  }
+  postedBy: user {
+    ...user
+  }
+  likes {
+    user_id
+  }
+  likesCount {
+    count
+  }
+}

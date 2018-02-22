@@ -1,0 +1,5 @@
+mutation addProductLikeMutation($input: AddProductLikeInput!) {
+  addLike: addProductLike(input: $input) {
+    user_id
+  }
+}

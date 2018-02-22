@@ -1,0 +1,20 @@
+#import "../fragments/user.gql"
+
+query getUserEndorsements($userId: ID!) {
+  endorsements: endorsementsQuery(userId: $userId) {
+    edges {
+      node {
+        id
+        quality
+        authentic
+        endorsedBy: endorser {
+          ...user
+        }
+        user {
+          ...user
+        }
+        created_at
+      }
+    }
+  }
+}

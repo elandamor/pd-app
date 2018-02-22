@@ -1,0 +1,12 @@
+#import "../fragments/post.gql"
+#import "../fragments/product.gql"
+#import "../fragments/service.gql"
+
+query getFeed($userId: ID!, $filter: String = "") {
+  feed: feedQuery(userId: $userId, filter: $filter) {
+    __typename
+    ...post
+    ...product
+    ...service
+  }
+}

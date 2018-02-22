@@ -1,0 +1,7 @@
+#import "../fragments/user.gql"
+
+query getAuthenticatedUser {
+  authenticatedUser @client {
+    ...user
+  }
+}

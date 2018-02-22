@@ -1,0 +1,13 @@
+#import "../fragments/user.gql"
+
+query getFollowees($userId: ID!) {
+  followees: followeesQuery(userId: $userId) {
+    edges {
+      node {
+        followee {
+          ...user
+        }
+      }
+    }
+  }
+}

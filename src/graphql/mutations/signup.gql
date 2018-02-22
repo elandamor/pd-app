@@ -1,0 +1,13 @@
+#import "../fragments/user.gql"
+
+mutation signup($input: RegisterUserInput!) {
+  signedUpUser: register(input: $input) {
+    user {
+      ...user
+    }
+    errors {
+      field
+      message
+    }
+  }
+}

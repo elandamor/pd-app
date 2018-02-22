@@ -1,0 +1,5 @@
+mutation addServiceLikeMutation($input: AddServiceLikeInput!) {
+  addLike: addServiceLike(input: $input) {
+    user_id
+  }
+}

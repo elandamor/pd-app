@@ -1,0 +1,7 @@
+#import "../fragments/productImage.gql"
+
+mutation addProductImage($input: AddProductImageInput!) {
+  addProductImage(input: $input) {
+    ...productImage
+  }
+}

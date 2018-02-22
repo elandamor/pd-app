@@ -1,0 +1,12 @@
+#import "../fragments/user.gql"
+
+mutation addComment($input: AddPostCommentInput!) {
+  addComment(input: $input) {
+    id
+    body
+    created_at
+    postedBy: user {
+      ...user
+    }
+  }
+}

@@ -1,0 +1,5 @@
+mutation addPostLikeMutation($input: AddPostLikeInput!) {
+  addLike(input: $input) {
+    user_id
+  }
+}

@@ -1,0 +1,21 @@
+#import "../fragments/user.gql"
+
+query getThreads($userId: ID!) {
+  threads: threadsQuery(userId: $userId) {
+    edges {
+      node {
+        id
+        participants {
+          ...user
+        }
+        messages {
+          id
+          body
+          sentBy: user {
+            ...user
+          }
+        }
+      }
+    }
+  }
+}

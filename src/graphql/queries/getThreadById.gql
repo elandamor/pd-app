@@ -1,0 +1,17 @@
+#import "../fragments/user.gql"
+
+query getThreadById($id: ID!) {
+  thread(id: $id) {
+    id
+    participants {
+      ...user
+    }
+    messages {
+      id
+      body
+      sentBy: user {
+        ...user
+      }
+    }
+  }
+}

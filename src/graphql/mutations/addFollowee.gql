@@ -1,0 +1,9 @@
+#import "../fragments/user.gql"
+
+mutation addFollowee($input: AddFolloweeInput!) {
+  addFollowee(input: $input) {
+    followee {
+      ...user
+    }
+  }
+}

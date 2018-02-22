@@ -1,0 +1,13 @@
+#import "../fragments/user.gql"
+
+mutation addServiceReview($input: AddServiceReviewInput!) {
+	addReview: addServiceReview(input: $input) {
+		id
+    title
+		description
+		rating
+		reviewedBy: reviewer {
+			...user
+		}
+	}
+}

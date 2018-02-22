@@ -1,0 +1,7 @@
+mutation editCollection($input: EditCollectionInput!) {
+  editCollection(input: $input) {
+    id
+    name
+    privacy
+  }
+}

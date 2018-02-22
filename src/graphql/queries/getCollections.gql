@@ -1,0 +1,28 @@
+#import "../fragments/product.gql"
+#import "../fragments/service.gql"
+#import "../fragments/user.gql"
+
+# @param {Int} userId - Authenticated user's ID.
+# @param {Boolean} withProducts - If true returns collections with products.
+# @param {Boolean} withServices - If true returns collections with services.
+query getCollections(
+  $userId: ID!,
+  $withProducts: Boolean = false,
+  $withServices: Boolean = false
+) {
+  collections: collectionsQuery(userId: $userId) {
+    edges {
+      node {
+        id
+        name
+        privacy
+        products @include(if: $withProducts) {
+          ...product
+        }
+        services @include(if: $withServices) {
+          ...service
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+#import "../fragments/post.gql"
+#import "../fragments/user.gql"
+
+query getPostById($postId: ID!, $withComments: Boolean = false) {
+  post(id: $postId) {
+    ...post
+    comments @include(if: $withComments) {
+      id
+      body
+      created_at
+      postedBy: user {
+        ...user
+      }
+    }
+  }
+}
+

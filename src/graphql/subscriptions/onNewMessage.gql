@@ -1,0 +1,17 @@
+#import "../fragments/user.gql"
+
+subscription onNewMessage($threadIds: [ID]!){
+  onNewMessage: messageUpdated(threadIds: $threadIds) {
+    id
+    node {
+      id
+      body
+      sentBy: user {
+        ...user
+      }
+      thread {
+        id
+      }
+    }
+  }
+}

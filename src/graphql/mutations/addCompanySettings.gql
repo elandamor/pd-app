@@ -1,0 +1,5 @@
+mutation addCompanySettings($input: AddCompanyInput!) {
+  settings: addCompany(input: $input) {
+    id
+  }
+}

@@ -1,0 +1,17 @@
+#import "../fragments/product.gql"
+#import "../fragments/user.gql"
+
+query getProductById($id: ID!, $withReviews: Boolean = false) {
+  product(id: $id) {
+    ...product
+    reviews @include(if: $withReviews) {
+      id
+      title
+      rating
+      description
+      reviewedBy: reviewer {
+        ...user
+      }
+    }
+  }
+}

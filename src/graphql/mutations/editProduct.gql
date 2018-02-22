@@ -1,0 +1,7 @@
+#import "../fragments/product.gql"
+
+mutation editProduct($input: EditProductInput!) {
+  editProduct(input: $input) {
+    ...product
+  }
+}

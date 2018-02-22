@@ -1,0 +1,5 @@
+mutation addThreadMutation($input: AddThreadInput!) {
+  addThread(input: $input) {
+    id
+  }
+}
