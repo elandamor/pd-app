@@ -7,10 +7,11 @@ import AccountMenu from '../../components/AccountMenu/Loadable';
 import Header from '../../components/Header';
 import MobileNav from '../../components/MobileMainNav';
 // Pages
-import Explore from '../../pages/Explore/Loadable';
+// import Explore from '../../pages/Explore/Loadable';
 import Home from '../../pages/Home/Loadable';
 import Messages from '../../pages/Messages/Loadable';
-import Notifications from '../../pages/Notifications/Loadable';
+// import Notifications from '../../pages/Notifications/Loadable';
+// import Profile from '../../pages/Profile/Loadable';
 // Styled-Components
 import Wrapper, { Footer, Page } from './styles';
 
@@ -85,21 +86,9 @@ class App extends Component {
               )}
             />
             <Route
-              path="/explore"
-              render={(props) => (
-                <Explore {...props} />
-              )}
-            />
-            <Route
               path="/messages"
               render={(props) => (
                 <Messages {...props} />
-              )}
-            />
-            <Route
-              path="/notifications"
-              render={(props) => (
-                <Notifications {...props} />
               )}
             />
           </Switch>

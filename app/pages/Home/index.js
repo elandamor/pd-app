@@ -26,7 +26,7 @@ import Wrapper, { Filter } from './styles';
 // eslint-disable-next-line react/prefer-stateless-function
 class Home extends React.Component {
   handleFilter = () => {
-    console.log('Filtering...');
+
   }
 
   render() {
